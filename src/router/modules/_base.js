@@ -10,7 +10,7 @@ export default [
     {path: '/index', name: 'Index', component: Index, ...util.routeMeta('Index', true, false, ['*'])},
     {path: '/authorization/login', name: 'Login', component: Login, ...util.routeMeta('Login', true, false, ['*'])},
     {
-        path: '/authorization/login',
+        path: '/authorization/register',
         name: 'Register',
         component: Register, ...util.routeMeta('Register', true, false, ['*'])
     },
