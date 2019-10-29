@@ -31,7 +31,9 @@
             id: {
                 type: String,
                 default: () => generateUuid('v-f-i-')
-            }
+            },
+            errorCustomMessages: Array,
+            fieldName: Object
         },
         inject: ['mdForm'],
         data() {
@@ -41,7 +43,7 @@
         },
         computed: {
             isRequired() {
-                if (!this.prop) return false;
+                if (!this.prop || !this.mdForm.rules) return false;
                 let rules = this.mdForm.rules[this.prop];
                 return Array.isArray(rules) && rules.indexOf('required') !== -1;
             },
@@ -59,7 +61,7 @@
         },
         methods: {
             validator() {
-                let v = validator.make(this.mdForm.model, this.mdForm.rules);
+                let v = validator.make(this.mdForm.model, this.mdForm.rules, this.errorCustomMessages, this.fieldName);
 
                 if (v.fails()) {
                     this.errorMsg = v.getErrors()[this.prop];
@@ -72,10 +74,10 @@
 
             },
             onChange() {
-                this.validator()
+                this.validator();
             },
             onInput() {
-                this.validator()
+                this.validator();
             }
         }
     };

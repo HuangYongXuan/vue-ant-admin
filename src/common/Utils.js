@@ -15,7 +15,6 @@ export const Utils = {
      * @returns {Promise<unknown>}
      */
     async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined, errorMsg = undefined) {
-        console.info(response.data);
         if (response.data.success === true) {
             if (showSuccess) {
                 notification.success({

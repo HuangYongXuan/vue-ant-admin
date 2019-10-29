@@ -29,8 +29,7 @@ export default {
     actions: {
         async login({commit}, data) {
             return await userApi.auth(data).then(async res => {
-                console.info('authToken:', res);
-                return await Utils.responseHandler(res, true, true,'登陆成功').then(({data}) => {
+                return await Utils.responseHandler(res, true, true, '登陆成功').then(({data}) => {
                     commit('setToken', data.token);
                     commit('setExpiresIn', data.expiresAt);
                     commit('setLoginStatus', true);
@@ -39,14 +38,16 @@ export default {
             });
         },
         async logout({commit}) {
-            commit('setToken', undefined);
-            commit('setExpiresIn', undefined);
-            commit('setLoginStatus', false);
-            return await userApi.destroy();
+            return await userApi.destroy().then(() => true).finally(() => {
+                commit('setToken', undefined);
+                commit('setExpiresIn', undefined);
+                commit('setLoginStatus', false);
+                return true;
+            });
         },
         async getUserInfo({commit}) {
             return await userApi.profile(true).then(async res => {
-                await Utils.responseHandler(res, false, false).then(({data}) => {
+                return await Utils.responseHandler(res, false, false).then(({data}) => {
                     commit('setRoles', data.roles || []);
                     delete data.roles;
                     commit('setUserInfo', data);
