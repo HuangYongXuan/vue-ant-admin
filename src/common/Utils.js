@@ -1,7 +1,7 @@
-import {notification} from 'ant-design-vue'
+import {notification} from 'ant-design-vue';
 
 export const Utils = {
-    routeMeta (name, hidden, only, perms, icon) {
+    routeMeta(name, hidden, only, perms, icon) {
         return {meta: {name, hidden, only, perms, icon}};
     },
     /**
@@ -13,28 +13,56 @@ export const Utils = {
      * @param errorMsg      {string}        // 自定义错误消息
      * @returns {Promise<unknown>}
      */
-    async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined,  errorMsg = undefined) {
+    async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined, errorMsg = undefined) {
         if (response.data.success === true) {
             if (showSuccess) {
                 notification.success({
                     duration: 4.5,
                     message: '操作成功',
                     description: successMsg | response.data.message
-                })
+                });
             }
-            return  Promise.resolve(response.data)
+            return Promise.resolve(response.data);
         } else {
             if (showError) {
                 notification.success({
                     duration: 4.5,
                     message: '操作成功',
                     description: errorMsg | response.data.message
-                })
+                });
             }
-            return  Promise.reject(response)
+            return Promise.reject(response);
         }
     }
 };
 
+export function noop() {
+}
+
+export function getPropByPath(obj, path, strict) {
+    let tempObj = obj;
+    path = path.replace(/\[(\w+)\]/g, '.$1');
+    path = path.replace(/^\./, '');
+
+    let keyArr = path.split('.');
+    let i = 0;
+    for (let len = keyArr.length; i < len - 1; ++i) {
+        if (!tempObj && !strict) break;
+        let key = keyArr[i];
+        if (key in tempObj) {
+            tempObj = tempObj[key];
+        } else {
+            if (strict) {
+                throw new Error('please transfer a valid prop path to form item!');
+            }
+            break;
+        }
+    }
+    return {
+        o: tempObj,
+        k: keyArr[i],
+        v: tempObj ? tempObj[keyArr[i]] : null
+    };
+}
 
 export default Utils;
