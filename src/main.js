@@ -1,13 +1,17 @@
 import Vue from 'vue';
-import Ant from 'ant-design-vue'
+import Ant from 'ant-design-vue';
 import App from '@/App.vue';
-import router from '@/router'
-import store from '@/store'
+import router from '@/router';
+import store from '@/store';
+import VueBus from 'vue-bus/dist/vue-bus';
+import Utils from '@/common/Utils';
 import '@/assets/sass/app.scss';
 
 Vue.use(Ant);
+Vue.use(VueBus);
 
 Vue.config.productionTip = false;
+Vue.prototype.$utils = Utils;
 
 new Vue({
     router,

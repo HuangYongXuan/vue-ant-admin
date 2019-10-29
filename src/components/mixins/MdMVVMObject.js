@@ -6,36 +6,18 @@ export default {
         formRef: {
             type: String,
             default: 'form'
-        },
-        showValidatorFailMsg: {
-            type: Boolean,
-            default: true
-        },
-        failMsg: {
-            type: String,
-            default: '表单数据不完整'
         }
     },
     data() {
         return {
             data: this.value,
-            form: {}
         };
     },
     created() {
-        this.form = this.$form.createForm(this, {
-            name: 'register'
-        });
     },
     methods: {
-        onSubmit(e) {
-            e.preventDefault();
-            this.form.validateFieldsAndScroll((err, values) => {
-                if (!err) {
-                    console.log('Received values of form: ', values);
-                }
-                console.info(err)
-            });
+        onSubmit() {
+            this.$emit('submit', this.data);
         }
     },
     watch: {
