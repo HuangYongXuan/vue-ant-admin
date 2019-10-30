@@ -1,6 +1,6 @@
 <template>
     <a-layout-sider :collapsible="collapsible" :trigger="null" v-model="collapsed" :theme="_theme">
-        <div class="logo">
+        <div class="logo" v-theme="_theme">
             <router-link :to="{name: 'Welcome'}">
                 <svg viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" fill="currentColor" width="128"
@@ -102,13 +102,18 @@
 </script>
 
 <style scoped lang="scss">
+    .v-theme-dark {
+        background: #002140;
+        h1 {
+            color: white;
+        }
+    }
     .logo {
         position: relative;
         height: 64px;
         padding-left: 24px;
         overflow: hidden;
         line-height: 64px;
-        background: #002140;
         -webkit-transition: all .3s;
         transition: all .3s;
 
@@ -121,7 +126,6 @@
 
         h1 {
             display: inline-block;
-            color: #fff;
             font-size: 20px;
             margin: 0 0 0 12px;
             font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;

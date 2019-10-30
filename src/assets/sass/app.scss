@@ -18,12 +18,21 @@
   transition: all .5s;
 }
 
-.list-enter, .list-leave-to
-{
+.list-enter, .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
 
 .v-form {
   padding: 10px;
+}
+
+.v-theme-dark {
+  color: rgba(255, 255, 255, 0.65);
+  background: #001529;
+}
+
+.v-theme-light {
+  color: rgba(0, 0, 0, 0.65);
+  background: #fff;
 }

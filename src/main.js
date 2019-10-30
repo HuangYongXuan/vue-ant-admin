@@ -5,6 +5,7 @@ import router from '@/router';
 import store from '@/store';
 import VueBus from 'vue-bus/dist/vue-bus';
 import Utils from '@/common/Utils';
+import '@/common/VTheme';
 import '@/assets/sass/app.scss';
 
 Vue.use(Ant);

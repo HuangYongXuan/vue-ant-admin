@@ -1,6 +1,6 @@
 <template>
     <a-menu :theme="_theme" class="md-user-header-menu" mode="horizontal" :default-selected-keys="defaultSelectedKeys">
-        <slot name="first"/>
+        <slot/>
         <a-sub-menu v-if="loginStatus">
             <span slot="title" class="submenu-title-wrapper">
                 <a-avatar :size="32" :src="userInfo.avatar"/> {{userInfo.username}}

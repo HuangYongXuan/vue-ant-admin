@@ -1,6 +1,6 @@
 <template>
-    <a-layout-header :theme="_theme" :style="{backgroundColor: _theme === 'dark' ? '#001529': '#ffffff'}">
-        <a class="v-trigger" @click="()=> show = !show" :style="{color: _theme === 'dark' ? 'white': 'black'}">
+    <a-layout-header :theme="_theme" v-theme="_theme">
+        <a class="v-trigger" @click="()=> show = !show" v-theme="_theme">
             <a-icon
                     class="trigger"
                     :type="show ? 'menu-unfold' : 'menu-fold'"/>
