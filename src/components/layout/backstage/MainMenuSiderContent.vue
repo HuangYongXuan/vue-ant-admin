@@ -40,7 +40,7 @@
             </router-link>
         </div>
         <a-menu mode="inline" :openKeys.sync="openKeys" @openChange="onOpenChange" :theme="_theme"
-                style="border-right: none" :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
+                 :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
             <a-sub-menu key="Category">
                 <span slot="title"><a-icon type="shop"/><span>Category</span></span>
                 <a-menu-item key="Categories" @click="$router.push({name: 'Categories'})">Categories</a-menu-item>
