@@ -1,16 +1,17 @@
-import Welcome from '@/views/backstage/Welcome';
+const MainLayout = () => import ('@/components/layout/backstage/MainLayout');
+const Welcome = () => import( '@/views/backstage/Welcome');
 
 export default [
     {
         name: 'Backstage',
         path: '/backstage',
-        components: Welcome,
+        component: MainLayout,
         children: [
             {
                 name: 'Welcome',
                 path: 'welcome',
-                components: Welcome,
+                component: Welcome
             }
         ]
     }
-]
+];

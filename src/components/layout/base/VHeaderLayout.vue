@@ -1,39 +1,42 @@
 <template>
-    <a-layout-header class="v-header">
-        <div class="v-logo" @click="goIndex">
+    <a-layout-header class="v-header" :theme="theme">
+        <div class="v-logo" @click="goIndex" v-show="model === 'logo'">
             <img src="@/assets/logo.png" alt="">
         </div>
-        <div class="v-menu">
-            <a-menu @click="onMenuClick"
-                    theme="dark"
-                    mode="horizontal"
-                    :defaultSelectedKeys="defaultSelectedKeys"
-                    :style="{ lineHeight: '64px' }">
-                <a-menu-item key="Register" v-if="!loginStatus">
-                    <a-icon type="plus"/>
-                    注册
-                </a-menu-item>
-                <a-menu-item key="Login" v-if="!loginStatus">
-                    <a-icon type="login"></a-icon>
-                    登陆
-                </a-menu-item>
-                <a-sub-menu v-if="loginStatus">
+        <a-icon v-if="model ==='sider'"
+                class="trigger"
+                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                @click="()=> collapsed = !collapsed"
+        />
+        <a-menu @click="onMenuClick"
+                :theme="theme"
+                mode="horizontal"
+                :defaultSelectedKeys="defaultSelectedKeys"
+                :style="{ lineHeight: '64px' }">
+            <a-menu-item key="Register" v-if="!loginStatus">
+                <a-icon type="plus"/>
+                注册
+            </a-menu-item>
+            <a-menu-item key="Login" v-if="!loginStatus">
+                <a-icon type="login"></a-icon>
+                登陆
+            </a-menu-item>
+            <a-sub-menu v-if="loginStatus">
                     <span slot="title" class="submenu-title-wrapper">
                         <a-spin :spinning="spinning">
                             <a-avatar :size="32" :src="userInfo.avatar"/> {{userInfo.username}}
                         </a-spin>
                     </span>
-                    <a-menu-item-group title="SYSTEM">
-                        <a-menu-item key="gateway"><a-icon type="gateway" /> 管理后台</a-menu-item>
-                        <a-menu-item key="profile"><a-icon type="profile" /> 个人资料</a-menu-item>
-                    </a-menu-item-group>
-                    <a-menu-item-group title="OPTION">
-                        <a-menu-item key="notification"><a-icon type="notification" /> 通知</a-menu-item>
-                        <a-menu-item key="logout"><a-icon type="logout"/> 登出</a-menu-item>
-                    </a-menu-item-group>
-                </a-sub-menu>
-            </a-menu>
-        </div>
+                <a-menu-item-group title="SYSTEM">
+                    <a-menu-item key="Welcome"><a-icon type="gateway" /> 管理后台</a-menu-item>
+                    <a-menu-item key="profile"><a-icon type="profile" /> 个人资料</a-menu-item>
+                </a-menu-item-group>
+                <a-menu-item-group title="OPTION">
+                    <a-menu-item key="notification"><a-icon type="notification" /> 通知</a-menu-item>
+                    <a-menu-item key="logout"><a-icon type="logout"/> 登出</a-menu-item>
+                </a-menu-item-group>
+            </a-sub-menu>
+        </a-menu>
     </a-layout-header>
 </template>
 
@@ -42,6 +45,17 @@
 
     export default {
         name: 'VHeaderLayout',
+        props: {
+            model: {
+                type: String,
+                default: 'logo'
+            },
+            theme: {
+                type: String,
+                default: 'dark'
+            },
+            collapsed: Boolean
+        },
         data() {
             return {
                 spinning: false,
@@ -60,7 +74,6 @@
             },
             onMenuClick({key}) {
                 switch (key) {
-                    case 'gateway': break;
                     case 'profile': break;
                     case 'notification': break;
                     case 'logout': this.logout(); break;
@@ -88,7 +101,7 @@
             cursor: pointer;
 
             img {
-                width: 60px;
+                width: 40px;
             }
         }
 
