@@ -1,8 +1,8 @@
 <template>
     <a-layout class="md-layout">
-        <v-menu-sider collapsed/>
+        <main-menu-sider :collapsed="collapsed"/>
         <a-layout>
-            <v-header-layout model="sider" theme="light"/>
+            <main-header :md-active.sync="collapsed"/>
             <a-layout-content>
                 <router-view/>
             </a-layout-content>
@@ -12,12 +12,16 @@
 </template>
 
 <script>
-    import VHeaderLayout from '@/components/layout/base/VHeaderLayout';
-    import VMenuSider from '@/components/layout/base/VMenuSider';
-
+    import MainHeader from '@/components/layout/backstage/MainHeader';
+    import MainMenuSider from '@/components/layout/backstage/MainMenuSider';
     export default {
         name: 'MainLayout',
-        components: {VMenuSider, VHeaderLayout}
+        components: {MainMenuSider, MainHeader},
+        data () {
+            return {
+                collapsed: false
+            }
+        }
     };
 </script>
 

@@ -1,14 +1,9 @@
 <template>
     <a-layout-header class="v-header" :theme="theme">
-        <div class="v-logo" @click="goIndex" v-show="model === 'logo'">
+        <div class="v-logo" @click="goIndex">
             <img src="@/assets/logo.png" alt="">
         </div>
-        <a-icon v-if="model ==='sider'"
-                class="trigger"
-                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-                @click="()=> collapsed = !collapsed"
-        />
-        <a-menu @click="onMenuClick"
+        <a-menu @click="onMenuClick" class="v-menu"
                 :theme="theme"
                 mode="horizontal"
                 :defaultSelectedKeys="defaultSelectedKeys"
@@ -46,15 +41,10 @@
     export default {
         name: 'VHeaderLayout',
         props: {
-            model: {
-                type: String,
-                default: 'logo'
-            },
             theme: {
                 type: String,
                 default: 'dark'
-            },
-            collapsed: Boolean
+            }
         },
         data() {
             return {
