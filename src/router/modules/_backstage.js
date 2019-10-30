@@ -34,6 +34,28 @@ export default [
                 name: 'Setting',
                 path: 'setting',
                 component: () => import('@/views/backstage/option/Setting.vue')
+            },
+            {
+                name: 'Category',
+                path: 'category',
+                component: BaseRouterView,
+                children:[
+                    {
+                        name: 'Classes',
+                        path: 'classes',
+                        component: () => import("@/views/backstage/category/Classes.vue")
+                    },
+                    {
+                        name: 'Categories',
+                        path: 'categories',
+                        component: () => import("@/views/backstage/category/Categories.vue")
+                    },
+                    {
+                        name: 'Types',
+                        path: "types",
+                        component: () => import("@/views/backstage/category/Types.vue")
+                    }
+                ]
             }
         ]
     }

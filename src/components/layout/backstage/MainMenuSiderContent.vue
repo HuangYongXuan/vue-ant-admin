@@ -39,8 +39,14 @@
                 <h1>RUOYI ANT</h1>
             </router-link>
         </div>
-        <a-menu mode="inline" :openKeys="openKeys" @openChange="onOpenChange" :theme="_theme"
-                style="border-right: none">
+        <a-menu mode="inline" :openKeys.sync="openKeys" @openChange="onOpenChange" :theme="_theme"
+                style="border-right: none" :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
+            <a-sub-menu key="Category">
+                <span slot="title"><a-icon type="shop"/><span>Category</span></span>
+                <a-menu-item key="Categories" @click="$router.push({name: 'Categories'})">Categories</a-menu-item>
+                <a-menu-item key="Classes" @click="$router.push({name: 'Classes'})">Classes</a-menu-item>
+                <a-menu-item key="Types" @click="$router.push({name: 'Types'})">Types</a-menu-item>
+            </a-sub-menu>
             <a-sub-menu key="sub1">
                 <span slot="title"><a-icon type="mail"/><span>Navigation One</span></span>
                 <a-menu-item key="1">Option 1</a-menu-item>
@@ -73,19 +79,35 @@
         name: 'MainMenuSiderContent',
         data() {
             return {
-                rootSubmenuKeys: ['sub1', 'sub2', 'sub4'],
                 openKeys: [],
+                defaultOpenKeys: [],
+                selectedKeys: [],
                 width: undefined
             };
         },
+        created() {
+            this.setDefaultOpenKeys();
+        },
         methods: {
             onOpenChange(openKeys) {
-                const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
-                if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-                    this.openKeys = openKeys;
-                } else {
-                    this.openKeys = latestOpenKey ? [latestOpenKey] : [];
-                }
+            },
+            setDefaultOpenKeys() {
+                let keys = [];
+                this.$route.matched.forEach(r => {
+                    if (r.name !== 'Backstage') {
+                        keys.push(r.name);
+                    }
+                });
+                this.openKeys = keys;
+                this.defaultOpenKeys = [this.$route.name];
+                this.selectedKeys = keys;
+            }
+        },
+        watch: {
+            $route() {
+                this.$nextTick(() => {
+                    this.setDefaultOpenKeys();
+                });
             }
         }
     };
