@@ -53,7 +53,7 @@
                 },
                 data: [],
                 columns: [
-                    this.$utils.genTabColumn('ID', 'id`', 100),
+                    this.$utils.genTabColumn('ID', 'id', 100),
                     this.$utils.genTabColumn('分类名称', 'name', 200),
                     this.$utils.genTabColumn('图标', 'icon', 80),
                     this.$utils.genTabColumn('大图', 'banner', 80),

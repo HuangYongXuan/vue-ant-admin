@@ -30,10 +30,12 @@
 .v-theme-dark {
   color: rgba(255, 255, 255, 0.65);
   background: #001529;
+
   .ant-breadcrumb-separator,
   .ant-breadcrumb-link {
     color: rgba(255, 255, 255, 0.65);
   }
+
   .ant-breadcrumb {
     > span {
       &:last-child {
@@ -42,6 +44,16 @@
         }
       }
     }
+  }
+
+  &.md-main-layout-breadcrumb {
+    border-color: #4c4c4c !important;
+  }
+}
+
+.ant-layout-sider-dark {
+  &.md-main-menu-sider.ant-layout-sider {
+    border: none !important;
   }
 }
 
@@ -56,6 +68,7 @@
 
 .v-theme-dark.ant-drawer {
   background-color: transparent;
+
   .ant-drawer-content {
     color: rgba(255, 255, 255, 0.65);
     background: #001529;
@@ -69,4 +82,19 @@
 .md-pagination {
   padding: 10px;
   text-align: right;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */
+{
+  transform: translateX(10px);
+  opacity: 0;
 }
