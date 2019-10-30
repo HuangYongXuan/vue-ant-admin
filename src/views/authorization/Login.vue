@@ -5,7 +5,7 @@
             <a-col :xxl="9" :xs="0" :sm="4" :xl="8" :lg="8"/>
             <a-col :xxl="6" :xs="24" :sm="16" :xl="8" :lg="8">
                 <a-spin :spinning="spinning">
-                    <user-login-form v-model="form" @submit="onLogin"/>
+                    <user-login-form v-model="form" @submit="onLogin" class="v-form"/>
                 </a-spin>
             </a-col>
         </a-row>

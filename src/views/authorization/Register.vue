@@ -4,7 +4,7 @@
         <a-row>
             <a-col :xxl="9" :xs="0" :sm="4" :xl="8" :lg="8"/>
             <a-col :xxl="6" :xs="24" :sm="16" :xl="8" :lg="8">
-                <user-register-form v-model="form" @submit="onRegister"></user-register-form>
+                <user-register-form v-model="form" @submit="onRegister" class="v-form"></user-register-form>
             </a-col>
         </a-row>
     </div>

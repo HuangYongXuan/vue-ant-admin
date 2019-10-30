@@ -83,11 +83,12 @@
 <style scoped lang="scss">
     .v-header {
         display: flex;
+        padding: 0 10px;
 
         .v-logo {
-            flex: 0 0 100px;
+            flex: 0 0 40px;
             margin-right: 10px;
-            text-align: center;
+            text-align: left;
             cursor: pointer;
 
             img {
