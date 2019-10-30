@@ -90,6 +90,7 @@
 
         .md-form-label {
             line-height: 30px;
+            padding-right: 10px;
 
             .md-required {
                 color: #ff3949;
@@ -112,8 +113,11 @@
     }
 
     .md-form-inline {
-        display: flex;
-
+        display: inline-flex;
+        padding-right: 10px;
+        &:last-child {
+            padding-right: 0;
+        }
         .md-form-input {
             flex: 1
         }

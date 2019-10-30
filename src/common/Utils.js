@@ -34,6 +34,22 @@ export const Utils = {
             }
             return Promise.reject(response);
         }
+    },
+    genTabColumn(t, k, w, di, a = 'center', slot = undefined, f = undefined) {
+        let column = {
+            align: a,
+            title: t,
+            key: k,
+            width: w,
+            dataIndex: di || k,
+            scopedSlots: {customRender: slot || k}
+        };
+
+        if (f) {
+            column.fixed = f;
+        }
+
+        return column;
     }
 };
 

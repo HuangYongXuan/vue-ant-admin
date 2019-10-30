@@ -50,7 +50,7 @@ Request.interceptors.response.use(
                 break;
             case 401:
                 errorMessage('请求要求用户的身份认证');
-                store.commit('logout');
+                store.dispatch('logout');
                 router.replace({name: 'Login'});
                 break;
             case 403:

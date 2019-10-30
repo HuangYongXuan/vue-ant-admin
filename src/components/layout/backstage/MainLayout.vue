@@ -34,7 +34,6 @@
         min-height: 100%;
 
         .md-content {
-            padding: 20px;
             background-color: #eeeeee;
             min-height: 100%;
         }
