@@ -5,7 +5,9 @@
             <main-header :md-active.sync="collapsed"/>
             <a-layout-content>
                 <main-layout-breadcrumb/>
-                <router-view/>
+                <div class="md-content">
+                    <router-view/>
+                </div>
             </a-layout-content>
             <a-layout-footer>Footer</a-layout-footer>
         </a-layout>
@@ -30,5 +32,11 @@
 <style scoped lang="scss">
     .md-layout {
         min-height: 100%;
+
+        .md-content {
+            padding: 20px;
+            background-color: #eeeeee;
+            min-height: 100%;
+        }
     }
 </style>

@@ -1,10 +1,7 @@
 <template>
     <div class="md-main-layout-breadcrumb" v-theme="_theme">
         <a-breadcrumb>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
+            <a-breadcrumb-item v-for="(r,i) in $route.matched" :key="i">{{r.name}}</a-breadcrumb-item>
         </a-breadcrumb>
     </div>
 </template>

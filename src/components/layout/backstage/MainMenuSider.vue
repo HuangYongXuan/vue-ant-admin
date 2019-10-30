@@ -27,7 +27,7 @@
         data() {
             return {
                 width: undefined,
-                menuWidth: 200
+                menuWidth: 256
             };
         },
         created() {
@@ -50,5 +50,8 @@
 
 <style scoped lang="scss">
     .md-main-menu-sider {
+       &.ant-layout-sider {
+            border-right: 1px solid #e3e3e3;
+       }
     }
 </style>

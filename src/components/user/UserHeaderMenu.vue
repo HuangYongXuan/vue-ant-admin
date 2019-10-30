@@ -1,5 +1,5 @@
 <template>
-    <a-menu :theme="_theme" class="md-user-header-menu" mode="horizontal" :default-selected-keys="defaultSelectedKeys">
+    <a-menu :theme="_theme" class="md-user-header-menu" mode="horizontal" :selectable="false">
         <slot/>
         <a-sub-menu v-if="loginStatus">
             <span slot="title" class="submenu-title-wrapper">
