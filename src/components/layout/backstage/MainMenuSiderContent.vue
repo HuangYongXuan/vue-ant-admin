@@ -39,7 +39,7 @@
                 <h1>RUOYI ANT</h1>
             </router-link>
         </div>
-        <a-menu mode="inline" :openKeys.sync="openKeys" @openChange="onOpenChange" :theme="_theme"
+        <a-menu mode="inline" :openKeys.sync="openKeys" @click="onClick" :theme="_theme"
                  :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
             <a-sub-menu key="Category">
                 <span slot="title"><a-icon type="shop"/><span>Category</span></span>
@@ -89,7 +89,8 @@
             this.setDefaultOpenKeys();
         },
         methods: {
-            onOpenChange(openKeys) {
+            onClick() {
+                this.$emit('change')
             },
             setDefaultOpenKeys() {
                 let keys = [];

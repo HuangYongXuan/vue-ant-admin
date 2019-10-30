@@ -4,11 +4,11 @@
             <img src="@/assets/logo.png" alt="">
         </div>
         <user-header-menu class="v-menu">
-            <a-menu-item key="Register" @click="$router.push({name: 'Register'})">
+            <a-menu-item key="Register" @click="$router.push({name: 'Register'})" v-if="!loginStatus">
                 <a-icon type="plus"/>
                 注册
             </a-menu-item>
-            <a-menu-item key="Login" @click="$router.push({name: 'Login'})">
+            <a-menu-item key="Login" @click="$router.push({name: 'Login'})" v-if="!loginStatus">
                 <a-icon type="login"></a-icon>
                 登陆
             </a-menu-item>
@@ -32,7 +32,7 @@
             this.defaultSelectedKeys = [this.$route.name];
         },
         computed: {
-            ...mapGetters(['loginStatus'])
+            ...mapGetters({loginStatus: 'loginStatus'})
         },
         methods: {
             goIndex() {

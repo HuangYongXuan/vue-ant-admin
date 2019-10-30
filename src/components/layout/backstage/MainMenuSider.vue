@@ -5,7 +5,7 @@
     </a-layout-sider>
     <a-drawer class="md-main-menu-sider" v-else :mask="true" :closable="false" :visible.sync="show" :theme="_theme"
               placement="left" @close="onClose" :width="menuWidth" :wrap-class-name="'v-theme-' + _theme">
-        <main-menu-sider-content/>
+        <main-menu-sider-content @change="show = false"/>
     </a-drawer>
 </template>
 
