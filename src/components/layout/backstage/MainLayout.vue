@@ -1,9 +1,10 @@
 <template>
     <a-layout class="md-layout">
-        <main-menu-sider :collapsed="collapsed"/>
+        <main-menu-sider :md-active.sync="collapsed"/>
         <a-layout>
             <main-header :md-active.sync="collapsed"/>
             <a-layout-content>
+                <main-layout-breadcrumb/>
                 <router-view/>
             </a-layout-content>
             <a-layout-footer>Footer</a-layout-footer>
@@ -14,9 +15,10 @@
 <script>
     import MainHeader from '@/components/layout/backstage/MainHeader';
     import MainMenuSider from '@/components/layout/backstage/MainMenuSider';
+    import MainLayoutBreadcrumb from '@/components/layout/backstage/MainLayoutBreadcrumb';
     export default {
         name: 'MainLayout',
-        components: {MainMenuSider, MainHeader},
+        components: {MainLayoutBreadcrumb, MainMenuSider, MainHeader},
         data () {
             return {
                 collapsed: false
