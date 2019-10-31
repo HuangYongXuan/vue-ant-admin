@@ -1,9 +1,11 @@
 <template>
     <a-layout-header class="v-header" v-theme="_theme">
-        <div class="v-logo" @click="goIndex">
-            <img src="@/assets/logo.png" alt="">
-        </div>
         <user-header-menu class="v-menu">
+            <a-menu-item class="v-logo">
+                <div  @click="goIndex">
+                    <img src="@/assets/logo.png" alt="">
+                </div>
+            </a-menu-item>
             <a-menu-item key="Register" @click="$router.push({name: 'Register'})" v-if="!loginStatus">
                 <a-icon type="plus"/>
                 注册
@@ -45,14 +47,12 @@
 <style scoped lang="scss">
     .v-header {
         display: flex;
-        padding: 0 10px;
+        padding: 0;
+        position: relative;
 
         .v-logo {
-            flex: 0 0 40px;
-            margin-right: 10px;
-            text-align: left;
-            cursor: pointer;
-
+            position: absolute;
+            left: 0;
             img {
                 width: 40px;
             }
