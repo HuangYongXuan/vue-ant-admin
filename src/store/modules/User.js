@@ -54,6 +54,16 @@ export default {
                     return data;
                 });
             });
+        },
+        async refreshToken ({commit}) {
+            return await userApi.tokenRefresh().then(async res => {
+                return await Utils.responseHandler(res, false, false).then(({data}) => {
+                    commit('setToken', data.token);
+                    commit('setExpiresIn', data.expiresAt);
+                    commit('setLoginStatus', true);
+                    return data;
+                })
+            })
         }
     },
     getters: {

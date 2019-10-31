@@ -7,6 +7,7 @@ import VueBus from 'vue-bus/dist/vue-bus';
 import Utils from '@/common/Utils';
 import '@/common/VTheme';
 import '@/assets/sass/app.scss';
+import '@/router/RouterHook'
 
 Vue.use(Ant);
 Vue.use(VueBus);

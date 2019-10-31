@@ -23,6 +23,6 @@ module.exports = {
             }
         }
     },
-    publicPath: '/forums/backstage/',
+    publicPath: '/forums',
     runtimeCompiler: true
 };
