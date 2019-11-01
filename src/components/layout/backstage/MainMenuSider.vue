@@ -1,11 +1,11 @@
 <template>
     <a-layout-sider class="md-main-menu-sider" :width="menuWidth" :collapsible="collapsible" :trigger="null"
                     v-model="show" :theme="_theme" breakpoint="xl" v-if="width > 576">
-        <main-menu-sider-content/>
+        <main-menu-sider-content :collapsible="show"/>
     </a-layout-sider>
     <a-drawer class="md-main-menu-sider" v-else :mask="true" :closable="false" :visible.sync="show" :theme="_theme"
               placement="left" @close="onClose" :width="menuWidth" :wrap-class-name="'v-theme-' + _theme">
-        <main-menu-sider-content @change="show = false"/>
+        <main-menu-sider-content @change="show = false" :collapsible="show"/>
     </a-drawer>
 </template>
 
@@ -50,8 +50,8 @@
 
 <style scoped lang="scss">
     .md-main-menu-sider {
-       &.ant-layout-sider {
+        &.ant-layout-sider {
             border-right: 1px solid #e3e3e3;
-       }
+        }
     }
 </style>

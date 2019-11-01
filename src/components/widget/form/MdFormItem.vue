@@ -1,15 +1,13 @@
 <template>
-    <div class="md-form-item" :class="{
-        'is-error': hasError,
-        'md-form-inline': mdForm.inline
-    }" @change="onChange" @input="onInput">
+    <div class="md-form-item" :class="{'is-error': hasError,'md-form-inline': mdForm.inline}"
+         @change="onChange" @input="onInput" :style="{textAlign: align}">
         <label v-if="label" class="md-form-label" :style="{width: mdForm.labelWidth}">
             <span v-if="isRequired" class="md-required">*</span>
             {{label}}
         </label>
         <div class="md-form-input">
             <slot/>
-            <div class="md-form-error">
+            <div class="md-form-error" :class="mdForm.inlineError === true ? 'md-form-error-inline' : ''">
                 <transition-group name="list" tag="ul">
                     <li v-for="(e,i) in errorMsg" :key="e" v-if="(showOneError && i===0) || !showOneError">{{e}}</li>
                 </transition-group>
@@ -32,6 +30,7 @@
                 type: String,
                 default: () => generateUuid('v-f-i-')
             },
+            align: String,
             errorCustomMessages: Array,
             fieldName: Object
         },
@@ -61,8 +60,8 @@
         },
         methods: {
             validator() {
-                let v = validator.make(this.mdForm.model, this.mdForm.rules, this.errorCustomMessages, this.fieldName);
-
+                let v = validator.make(this.mdForm.model, this.mdForm.rules, [], this.fieldName);
+                console.info('验证');
                 if (v.fails()) {
                     this.errorMsg = v.getErrors()[this.prop];
                     return false;
@@ -86,6 +85,7 @@
 <style scoped lang="scss">
     .md-form-item {
         margin-top: 10px;
+        padding-right: 10px;
 
         .md-form-label {
             line-height: 30px;
@@ -114,11 +114,29 @@
     .md-form-inline {
         display: inline-flex;
         padding-right: 10px;
+
         &:last-child {
             padding-right: 0;
         }
+
         .md-form-input {
-            flex: 1
+            flex: 1;
+            position: relative;
+
+            > .ant-btn {
+                margin-right: 10px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            .md-form-error-inline {
+                top: -12px;
+                right: 5px;
+                position: absolute;
+                background-color: white;
+            }
         }
     }
 </style>

@@ -27,7 +27,8 @@
                 }
             },
             inline: Boolean,
-            labelWidth: String
+            labelWidth: String,
+            inlineError: Boolean
         },
         data() {
             return {

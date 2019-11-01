@@ -1,15 +1,21 @@
 <template>
     <div class="md-categories">
         <a-spin :spinning="spinning">
-            <md-form inline :model="query" :rules="queryRules" @submit="getData(true)" class="v-form">
-                <md-form-item label="分类名称" show-one-error prop="name">
-                    <a-input v-model="query.name" placeholder="通过名称搜索" maxlength="32"/>
-                </md-form-item>
-                <md-form-item>
-                    <a-button type="primary" html-type="submit">查询</a-button>
-                </md-form-item>
+            <md-form inline :model="query" :rules="queryRules" @submit="getData(true)" class="v-form" inline-error>
+                <a-row>
+                    <responsive-col>
+                        <md-form-item label="分类名称" show-one-error prop="name">
+                            <a-input v-model="query.name" placeholder="通过名称搜索" maxlength="33"/>
+                        </md-form-item>
+                    </responsive-col>
+                    <responsive-col>
+                        <md-form-item align="left">
+                            <a-button type="primary" html-type="submit" icon="search">查询</a-button>
+                            <a-button type="success" @click="status.drawer.create === true">创建</a-button>
+                        </md-form-item>
+                    </responsive-col>
+                </a-row>
             </md-form>
-
             <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }" row-key="id" :pagination="false">
                 <a-switch slot="isEnabled" slot-scope="text" :checked="text" disabled/>
                 <a-switch slot="isRoleAccess" slot-scope="text" :checked="text" disabled/>
@@ -28,6 +34,9 @@
                 />
             </div>
         </a-spin>
+        <a-drawer :visible.sync="status.drawer.create" width="1000">
+
+        </a-drawer>
     </div>
 </template>
 
@@ -36,10 +45,11 @@
     import MdFormItem from '@/components/widget/form/MdFormItem';
     import category from '@/common/apis/category';
     import FormatDatetime from '@/components/widget/FormatDatetime';
+    import ResponsiveCol from '@/components/widget/ResponsiveCol';
 
     export default {
         name: 'Categories',
-        components: {FormatDatetime, MdFormItem, MdForm},
+        components: {ResponsiveCol, FormatDatetime, MdFormItem, MdForm},
         data() {
             return {
                 spinning: true,
@@ -49,7 +59,7 @@
                     size: 20
                 },
                 queryRules: {
-                    name: ['nullable', 'between:1,32', 'string']
+                    name: ['required', 'between:1,32', 'string']
                 },
                 data: [],
                 columns: [
@@ -62,9 +72,14 @@
                     this.$utils.genTabColumn('角色控制', 'isRoleAccess'),
                     this.$utils.genTabColumn('排序', 'sortId', 100),
                     this.$utils.genTabColumn('创建时间', 'createdAt'),
-                    this.$utils.genTabColumn('操作', 'operation', 100, 'operation','center', 'action', 'right')
+                    this.$utils.genTabColumn('操作', 'operation', 100, 'operation', 'center', 'action', 'right')
                 ],
-                pageCount: 0
+                pageCount: 0,
+                status: {
+                    drawer: {
+                        create: true
+                    }
+                }
             };
         },
         mounted() {
@@ -91,10 +106,12 @@
         background-color: white;
 
         .md-form {
+            .md-responsive-col {
+                padding-right: 10px;;
+            }
 
             .md-form-item {
-                width: auto;
-                max-width: 100%;
+                width: 100%;
             }
         }
     }

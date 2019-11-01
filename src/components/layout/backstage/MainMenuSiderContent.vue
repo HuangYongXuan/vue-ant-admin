@@ -39,7 +39,7 @@
                 <h1>RUOYI ANT</h1>
             </router-link>
         </div>
-        <a-menu mode="inline" :openKeys.sync="openKeys" @click="onClick" :theme="_theme"
+        <a-menu mode="inline" :openKeys.sync="getOpenKeys" @click="onClick" :theme="_theme"
                  :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
             <a-sub-menu key="Category">
                 <span slot="title"><a-icon type="shop"/><span>Category</span></span>
@@ -77,6 +77,13 @@
 <script>
     export default {
         name: 'MainMenuSiderContent',
+        props: {
+            collapsible: {
+                type: Boolean,
+                required: false,
+                default: false
+            }
+        },
         data() {
             return {
                 openKeys: [],
@@ -87,6 +94,17 @@
         },
         created() {
             this.setDefaultOpenKeys();
+        },
+        computed: {
+            getOpenKeys: {
+                get () {
+                    if (this.collapsible) return [];
+                    return this.openKeys;
+                },
+                set (v) {
+                    this.openKeys = v
+                }
+            }
         },
         methods: {
             onClick() {
