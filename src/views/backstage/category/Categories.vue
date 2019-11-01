@@ -5,7 +5,7 @@
                 <a-row>
                     <responsive-col>
                         <md-form-item label="分类名称" show-one-error prop="name">
-                            <a-input v-model="query.name" placeholder="通过名称搜索" maxlength="33"/>
+                            <a-input v-model="query.name" placeholder="通过名称搜索" maxlength="32"/>
                         </md-form-item>
                     </responsive-col>
                     <responsive-col>
@@ -35,7 +35,9 @@
             </div>
         </a-spin>
         <md-drawer :md-active.sync="status.drawer.create" width="400" title="创建分类">
-            <forums-category-form v-model="form"></forums-category-form>
+            <a-spin :spinning="spinning2">
+                <forums-category-form v-model="form" @submit="onCreateSubmit"></forums-category-form>
+            </a-spin>
         </md-drawer>
     </div>
 </template>
@@ -54,13 +56,14 @@
         data() {
             return {
                 spinning: true,
+                spinning2: false,
                 query: {
                     name: undefined,
                     page: 1,
                     size: 20
                 },
                 queryRules: {
-                    name: ['required', 'between:1,32', 'string']
+                    name: ['between:1,32', 'string']
                 },
                 data: [],
                 columns: [
@@ -78,11 +81,10 @@
                 pageCount: 0,
                 status: {
                     drawer: {
-                        create: true
+                        create: false
                     }
                 },
                 form: {
-
                 }
             };
         },
@@ -99,6 +101,19 @@
                         this.pageCount = data.count;
                     });
                 }).finally(() => this.spinning = false);
+            },
+            onCreateSubmit() {
+                this.spinning2 = true;
+                let data = Object.assign({}, this.form);
+                data.icon = process.env.VUE_APP_STATIC_RESOURCE_URL + data.icon;
+                data.banner = process.env.VUE_APP_STATIC_RESOURCE_URL + data.banner;
+                category.created(data).then(res => {
+                    this.$utils.responseHandler(res, true).then(() => {
+                        this.status.drawer.create = false;
+                        this.form = {};
+                        this.getData(true);
+                    });
+                }).finally(() => this.spinning2 = false);
             }
         }
     };

@@ -1,7 +1,8 @@
 <template>
     <div class="md-user-selector">
-        <a-select :value="valueData" showSearch
+        <a-select v-model="v2" showSearch
                   :filterOption="false"
+                  placeholder="选择用户"
                   :showArrow="false"
                   labelInValue
                   :notFoundContent="fetching ? undefined : null"
@@ -23,6 +24,9 @@
     export default {
         name: 'UserSelector',
         mixins: [MdMVVMObject],
+        props: {
+            value: String
+        },
         data() {
             return {
                 fetching: true,
@@ -35,11 +39,16 @@
             };
         },
         computed: {
-            valueData() {
-                return {
-                    key: this.data,
-                    label: this.label
-                };
+            valueData: {
+                get () {
+                    return {
+                        key: this.data,
+                        label: this.label
+                    };
+                },
+                set(v) {
+                    console.info(v);
+                }
             }
         },
         mounted() {

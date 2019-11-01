@@ -55,11 +55,11 @@
                     banner: ['required', 'string', 'max:255'],
                     name: 'required|max:64',
                     description: 'string|nullable',
-                    moderatorId: 'required|nullable|integer|min:0',
+                    moderatorId: 'required|integer|min:0',
                     isEnabled: 'required|nullable|boolean',
                     isRoleAccess: 'required|nullable|boolean',
                     sortId: 'nullable|integer',
-                    roles: 'required|array|nullable'
+                    roles: 'required|array|min:1'
                 },
                 moderatorIdErrorMsg: {
                     required: "请选择用户",

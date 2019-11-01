@@ -1,3 +1,5 @@
 import ApiMaster from '@/common/apis/apiMaster';
 
-export default new ApiMaster('/api/backstage/forums/category')
+let category =new ApiMaster('/api/backstage/forums/category');
+
+export default category;
