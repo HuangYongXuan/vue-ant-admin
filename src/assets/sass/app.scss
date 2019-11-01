@@ -98,3 +98,8 @@
   transform: translateX(10px);
   opacity: 0;
 }
+
+.ant-drawer-wrapper-body,
+.ant-drawer-content-wrapper {
+  max-width: 100%;
+}
