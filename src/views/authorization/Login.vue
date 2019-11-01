@@ -17,7 +17,6 @@
     import UserLoginForm from '@/components/form/UserLoginForm';
 
     export default {
-        name: 'Login',
         components: {UserLoginForm, VHeaderLayout},
         data() {
             return {

@@ -6,9 +6,7 @@
             <a-layout-content>
                 <main-layout-breadcrumb/>
                 <div class="md-content">
-                    <transition name="slide-fade" mode="out-in">
-                        <router-view/>
-                    </transition>
+                    <base-router-view/>
                 </div>
             </a-layout-content>
             <a-layout-footer>Footer</a-layout-footer>
@@ -20,9 +18,10 @@
     import MainHeader from '@/components/layout/backstage/MainHeader';
     import MainMenuSider from '@/components/layout/backstage/MainMenuSider';
     import MainLayoutBreadcrumb from '@/components/layout/backstage/MainLayoutBreadcrumb';
+    import BaseRouterView from '@/components/widget/BaseRouterView';
     export default {
         name: 'MainLayout',
-        components: {MainLayoutBreadcrumb, MainMenuSider, MainHeader},
+        components: {BaseRouterView, MainLayoutBreadcrumb, MainMenuSider, MainHeader},
         data () {
             return {
                 collapsed: false

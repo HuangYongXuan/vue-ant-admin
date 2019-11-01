@@ -86,11 +86,10 @@
 <style scoped lang="scss">
     .md-form-item {
         margin-top: 10px;
-        margin-bottom: 10px;
 
         .md-form-label {
             line-height: 30px;
-            padding-right: 10px;
+            margin-right: 10px;
 
             .md-required {
                 color: #ff3949;

@@ -35,12 +35,12 @@ function setRefreshToken() {
     let timeout = store.getters.expiresIn - now - 60 * 60;
     if (timeout <= 0 || isNaN(timeout) || !timeout) {
         timeout = 0;
+    } else {
+        timeout *= 1000
     }
 
     timer = setTimeout(() => {
-        store.dispatch('refreshToken').then((res) => {
-            console.info('refresh token:', res);
-        });
+        store.dispatch('refreshToken').then();
     }, timeout);
 }
 

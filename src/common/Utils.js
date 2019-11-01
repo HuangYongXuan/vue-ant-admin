@@ -1,5 +1,4 @@
-import {notification} from 'ant-design-vue';
-import {install} from 'vuex';
+import {message} from 'ant-design-vue';
 
 export const Utils = {
     routeMeta(name, hidden, only, perms, icon) {
@@ -17,20 +16,12 @@ export const Utils = {
     async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined, errorMsg = undefined) {
         if (response.data.success === true) {
             if (showSuccess) {
-                notification.success({
-                    duration: 4.5,
-                    message: '提示',
-                    description: successMsg || response.data.message
-                });
+                await message.success(successMsg || response.data.message, 2)
             }
             return Promise.resolve(response.data);
         } else {
             if (showError) {
-                notification.error({
-                    duration: 4.5,
-                    message: '错误',
-                    description: errorMsg || response.data.message
-                });
+                await message.error(errorMsg || response.data.message, 2);
             }
             return Promise.reject(response);
         }
@@ -65,5 +56,6 @@ export const generateUuid = (prefix = '', size = 6) => {
 };
 
 export default {
-    ...Utils
+    ...Utils,
+    generateUuid
 };
