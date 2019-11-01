@@ -17,9 +17,10 @@
             <span> 只有选择的角色才能访问</span>
         </md-form-item>
         <md-form-item label="选择角色" prop="roles" v-if="data.isRoleAccess">
+            <role-multiple-selector v-model="data.roles"/>
         </md-form-item>
-        <md-form-item label="超级版主" prop="moderatorId">
-
+        <md-form-item label="超级版主" prop="moderatorId" :error-custom-messages="moderatorIdErrorMsg" show-one-error>
+            <user-selector v-model="data.moderatorId"/>
         </md-form-item>
         <md-form-item label="排序" prop="sortId">
             <a-input-number v-model="data.sortId"/> 数字越大越靠前
@@ -40,10 +41,12 @@
     import MdMVVMObject from '@/components/mixins/MdMVVMObject';
     import MdFormItem from '@/components/widget/form/MdFormItem';
     import MdUploadFile from '@/components/widget/MdUploadFile';
+    import RoleMultipleSelector from '@/components/selector/RoleMultipleSelector';
+    import UserSelector from '@/components/selector/UserSelector';
 
     export default {
         name: 'ForumsCategoryForm',
-        components: {MdUploadFile, MdFormItem, MdForm},
+        components: {UserSelector, RoleMultipleSelector, MdUploadFile, MdFormItem, MdForm},
         mixins: [MdMVVMObject],
         data() {
             return {
@@ -56,7 +59,12 @@
                     isEnabled: 'required|nullable|boolean',
                     isRoleAccess: 'required|nullable|boolean',
                     sortId: 'nullable|integer',
-                    roles: 'array|nullable'
+                    roles: 'required|array|nullable'
+                },
+                moderatorIdErrorMsg: {
+                    required: "请选择用户",
+                    integer: '请选择用户',
+                    min: '请选择用户'
                 }
             };
         }

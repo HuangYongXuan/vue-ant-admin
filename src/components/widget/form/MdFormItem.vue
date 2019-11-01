@@ -31,7 +31,7 @@
                 default: () => generateUuid('v-f-i-')
             },
             align: String,
-            errorCustomMessages: Array,
+            errorCustomMessages: Object,
             fieldName: Object
         },
         inject: ['mdForm'],
@@ -60,8 +60,7 @@
         },
         methods: {
             validator() {
-                let v = validator.make(this.mdForm.model, this.mdForm.rules, [], this.fieldName);
-                console.info('验证');
+                let v = validator.make(this.mdForm.model, this.mdForm.rules, this.errorCustomMessages, this.fieldName);
                 if (v.fails()) {
                     this.errorMsg = v.getErrors()[this.prop];
                     return false;
