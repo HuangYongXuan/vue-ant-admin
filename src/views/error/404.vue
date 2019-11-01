@@ -1,6 +1,6 @@
 <template>
     <div class="md-404">
-        <v-header-layout class="md-f"/>
+        <v-header-layout/>
         <div class="md-content">
             <a-empty description="你访问的地址不存在" :image="image">
                 <a-button @click="$router.replace({name: 'Base'})" type="primary" shape="round" ghost>返回首页</a-button>
