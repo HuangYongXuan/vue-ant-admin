@@ -11,7 +11,7 @@
                     <responsive-col>
                         <md-form-item align="left">
                             <a-button type="primary" html-type="submit" icon="search">查询</a-button>
-                            <a-button type="success" @click="status.drawer.create === true">创建</a-button>
+                            <a-button type="success" @click="status.drawer.create = true">创建</a-button>
                         </md-form-item>
                     </responsive-col>
                 </a-row>
@@ -34,9 +34,9 @@
                 />
             </div>
         </a-spin>
-        <a-drawer :visible.sync="status.drawer.create" width="1000">
-
-        </a-drawer>
+        <md-drawer :md-active.sync="status.drawer.create" width="400" title="创建分类">
+            <forums-category-form v-model="form"></forums-category-form>
+        </md-drawer>
     </div>
 </template>
 
@@ -46,10 +46,11 @@
     import category from '@/common/apis/category';
     import FormatDatetime from '@/components/widget/FormatDatetime';
     import ResponsiveCol from '@/components/widget/ResponsiveCol';
+    import MdDrawer from '@/components/widget/MdDrawer';
+    import ForumsCategoryForm from '@/components/form/ForumsCategoryForm';
 
     export default {
-        name: 'Categories',
-        components: {ResponsiveCol, FormatDatetime, MdFormItem, MdForm},
+        components: {ForumsCategoryForm, MdDrawer, ResponsiveCol, FormatDatetime, MdFormItem, MdForm},
         data() {
             return {
                 spinning: true,
@@ -79,6 +80,9 @@
                     drawer: {
                         create: true
                     }
+                },
+                form: {
+
                 }
             };
         },

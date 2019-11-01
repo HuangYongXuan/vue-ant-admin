@@ -1,10 +1,9 @@
 <template>
     <div class="md-form-item" :class="{'is-error': hasError,'md-form-inline': mdForm.inline}"
          @change="onChange" @input="onInput" :style="{textAlign: align}">
-        <label v-if="label" class="md-form-label" :style="{width: mdForm.labelWidth}">
-            <span v-if="isRequired" class="md-required">*</span>
-            {{label}}
-        </label>
+        <label v-if="label" class="md-form-label"
+               :style="{flex: '0 0 '+ mdForm.labelWidth}"
+               :class="{'md-required': isRequired}">{{label}}</label>
         <div class="md-form-input">
             <slot/>
             <div class="md-form-error" :class="mdForm.inlineError === true ? 'md-form-error-inline' : ''">
@@ -22,6 +21,7 @@
 
     export default {
         name: 'MdFormItem',
+        componentName: 'MdFormItem',
         props: {
             prop: String,
             label: String,
@@ -44,7 +44,7 @@
             isRequired() {
                 if (!this.prop || !this.mdForm.rules) return false;
                 let rules = this.mdForm.rules[this.prop];
-                return Array.isArray(rules) && rules.indexOf('required') !== -1;
+                return rules.indexOf('required') !== -1;
             },
             hasError() {
                 return this.errorMsg && this.errorMsg.length > 0;
@@ -84,17 +84,32 @@
 
 <style scoped lang="scss">
     .md-form-item {
+        display: inline-flex;
+        width: 100%;
         margin-top: 10px;
         padding-right: 10px;
 
         .md-form-label {
             line-height: 30px;
             margin-right: 10px;
+            position: relative;
+            padding-left: 10px;
 
-            .md-required {
-                color: #ff3949;
-                padding-right: 5px;
+            &.md-required {
+                /*color: #ff3949;*/
+                &:before{
+                    content: '*';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    color: #ff3949;
+                    line-height: 30px;
+                }
             }
+        }
+
+        .md-form-input {
+            flex: 1;
         }
 
         .md-form-error {
@@ -112,15 +127,14 @@
     }
 
     .md-form-inline {
-        display: inline-flex;
         padding-right: 10px;
+        width: auto;
 
         &:last-child {
             padding-right: 0;
         }
 
         .md-form-input {
-            flex: 1;
             position: relative;
 
             > .ant-btn {

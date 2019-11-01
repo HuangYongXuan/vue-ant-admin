@@ -16,14 +16,14 @@ export const Utils = {
     async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined, errorMsg = undefined) {
         if (response.data.success === true) {
             if (showSuccess) {
-                await message.success(successMsg || response.data.message, 2)
+                message.success(successMsg || response.data.message, 2)
             }
             return Promise.resolve(response.data);
         } else {
             if (showError) {
-                await message.error(errorMsg || response.data.message, 2);
+                message.error(errorMsg || response.data.message, 2);
             }
-            return Promise.reject(response);
+            return  Promise.reject(response);
         }
     },
     genTabColumn(t, k, w, di, a = 'center', slot = undefined, f = undefined) {
