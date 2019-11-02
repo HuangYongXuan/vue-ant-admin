@@ -16,7 +16,8 @@
                     </responsive-col>
                 </a-row>
             </md-form>
-            <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }" row-key="id" :pagination="false">
+            <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }" row-key="id" :pagination="false"
+                     :size="_setting.tableSize">
                 <a-switch slot="isEnabled" slot-scope="text" :checked="text" disabled/>
                 <a-switch slot="isRoleAccess" slot-scope="text" :checked="text" disabled/>
                 <a slot="action" slot-scope="text">action</a>
@@ -69,6 +70,7 @@
                 columns: [
                     this.$utils.genTabColumn('ID', 'id', 100),
                     this.$utils.genTabColumn('分类名称', 'name', 200),
+                    this.$utils.genTabColumn('管理员', 'username', 200),
                     this.$utils.genTabColumn('图标', 'icon', 80),
                     this.$utils.genTabColumn('大图', 'banner', 80),
                     this.$utils.genTabColumn('描述', 'description'),
@@ -76,7 +78,7 @@
                     this.$utils.genTabColumn('角色控制', 'isRoleAccess'),
                     this.$utils.genTabColumn('排序', 'sortId', 100),
                     this.$utils.genTabColumn('创建时间', 'createdAt'),
-                    this.$utils.genTabColumn('操作', 'operation', 100, 'operation', 'center', 'action', 'right')
+                    this.$utils.genTabColumn('操作', 'operation', 100, 'operation', 'center', 'action')
                 ],
                 pageCount: 0,
                 status: {
@@ -84,8 +86,7 @@
                         create: false
                     }
                 },
-                form: {
-                }
+                form: {}
             };
         },
         mounted() {

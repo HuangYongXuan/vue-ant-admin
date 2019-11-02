@@ -31,6 +31,6 @@ Vue.mixin({
         }
     },
     computed: {
-        ...Vuex.mapGetters({_theme: 'theme'})
+        ...Vuex.mapGetters({_theme: 'theme', _setting: 'setting'})
     }
 });

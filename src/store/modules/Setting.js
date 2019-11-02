@@ -1,6 +1,9 @@
 export default {
     state: {
-        theme: 'dark'
+        theme: 'dark',
+        setting: {
+            tableSize: 'small'
+        }
     },
     mutations: {
         SET_THEME(state, theme) {
@@ -13,6 +16,7 @@ export default {
         }
     },
     getters: {
-        theme: (s) => s.theme
+        theme: (s) => s.theme,
+        setting: s => s.setting
     }
 };

@@ -13,20 +13,30 @@ router.beforeEach((to, from, next) => {
     clearTimer();
 
     if (store.getters.loginStatus === true) {
-        if (['Login', 'Register'].includes(to.name)) {
+        if (['Login', 'Register'].indexOf(to.name) !== -1) {
+            NProgress.done();
             return next({name: 'Base'});
         }
         let now = parseInt(new Date().getTime() / 1000 + '');
         if (store.getters.expiresIn < now) {
-            store.dispatch('logout');
-            return next({name: 'Base'});
+            if (to.name !== 'Base') {
+                NProgress.done();
+                return next({name: 'Base'});
+            }
         }
     }
     return next();
 });
 
 router.afterEach(() => {
-    if (store.getters.loginStatus === true) setRefreshToken();
+    if (store.getters.loginStatus === true) {
+        let now = parseInt(new Date().getTime() / 1000 + '');
+        if (store.getters.expiresIn < now) {
+            store.dispatch('logout');
+        } else {
+            setRefreshToken();
+        }
+    }
     NProgress.done();
 });
 
@@ -36,11 +46,12 @@ function setRefreshToken() {
     if (timeout <= 0 || isNaN(timeout) || !timeout) {
         timeout = 0;
     } else {
-        timeout *= 1000
+        timeout *= 1000;
     }
 
     timer = setTimeout(() => {
         store.dispatch('refreshToken').then();
+        clearTimer();
     }, timeout);
 }
 
