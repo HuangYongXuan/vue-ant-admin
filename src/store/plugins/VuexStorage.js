@@ -24,8 +24,7 @@ export default class VuexLocalSync {
 
             let newState = merge(store.state, savedState || {});
             try {
-                store.commit('setToken', newState.User.accessToken);
-                // eslint-disable-next-line no-empty
+                store.commit('setToken', newState.User.token);
             } catch (e) {
             }
             store.replaceState(newState);

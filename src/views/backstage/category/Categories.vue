@@ -16,14 +16,43 @@
                     </responsive-col>
                 </a-row>
             </md-form>
-            <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1300 }" row-key="id" :pagination="false"
-                     :size="_setting.tableSize">
-                <a-switch slot="isEnabled" slot-scope="text" :checked="text" disabled/>
-                <a-switch slot="isRoleAccess" slot-scope="text" :checked="text" disabled/>
-                <a slot="action" slot-scope="text">action</a>
-                <a-avatar slot="icon" slot-scope="text" :src="text" :size="10"></a-avatar>
-                <img :src="text" slot="banner" slot-scope="text" alt="" height="10px">
-                <format-datetime slot="createdAt" slot-scope="text" :datetime="text"/>
+            <a-table :dataSource="data" :scroll="{ x: 1300 }" row-key="id" :pagination="false"
+                     :size="_setting.tableSize" bordered>
+                <a-table-column title="ID" data-index="id" align="left" :width="100"/>
+                <a-table-column title="分类名称" data-index="name" align="center"/>
+                <a-table-column title="用户名" data-index="username" align="center">
+                    <template slot-scope="username,record">
+                        <router-link v-if="username" :to="{name: 'Profile', params: {id: record.moderatorId}}">
+                            {{username}}
+                        </router-link>
+                    </template>
+                </a-table-column>
+                <a-table-column title="图标" data-index="icon" align="center" key="icon" :width="50">
+                    <a-avatar slot-scope="icon" :src="icon" :size="10"></a-avatar>
+                </a-table-column>
+                <a-table-column title="大图" data-index="banner" align="center" key="banner" :width="50">
+                    <img slot-scope="banner" :src="banner" alt="" height="10px">
+                </a-table-column>
+                <a-table-column title="是否启用" data-index="isEnabled" align="center" key="isEnabled" :width="80">
+                    <a-switch slot-scope="isEnabled" :checked="isEnabled" disabled/>
+                </a-table-column>
+                <a-table-column title="角色控制" data-index="isRoleAccess" align="center" key="isRoleAccess" :width="80">
+                    <a-switch slot-scope="isRoleAccess" :checked="isRoleAccess" disabled/>
+                </a-table-column>
+                <a-table-column title="排序" data-index="sortId" align="center" :width="50"/>
+                <a-table-column title="创建时间" data-index="createdAt" align="center" key="createdAt" :width="100">
+                    <format-datetime slot-scope="createdAt" :datetime="createdAt"/>
+                </a-table-column>
+                <a-table-column title="操作" align="right" key="action" :width="200">
+                    <template slot-scope="text, record">
+                        <a-button icon="edit" type="primary" :size="_setting.tableActionBtnSize">
+                            <span v-if="_setting.tableShowActionBtnText">编辑</span>
+                        </a-button>
+                        <a-button icon="delete" type="danger" :size="_setting.tableActionBtnSize">
+                            <span v-if="_setting.tableShowActionBtnText">编辑</span>
+                        </a-button>
+                    </template>
+                </a-table-column>
             </a-table>
             <div class="md-pagination">
                 <a-pagination
@@ -67,19 +96,6 @@
                     name: ['between:1,32', 'string']
                 },
                 data: [],
-                columns: [
-                    this.$utils.genTabColumn('ID', 'id', 100),
-                    this.$utils.genTabColumn('分类名称', 'name', 200),
-                    this.$utils.genTabColumn('管理员', 'username', 200),
-                    this.$utils.genTabColumn('图标', 'icon', 80),
-                    this.$utils.genTabColumn('大图', 'banner', 80),
-                    this.$utils.genTabColumn('描述', 'description'),
-                    this.$utils.genTabColumn('是否启用', 'isEnabled'),
-                    this.$utils.genTabColumn('角色控制', 'isRoleAccess'),
-                    this.$utils.genTabColumn('排序', 'sortId', 100),
-                    this.$utils.genTabColumn('创建时间', 'createdAt'),
-                    this.$utils.genTabColumn('操作', 'operation', 100, 'operation', 'center', 'action')
-                ],
                 pageCount: 0,
                 status: {
                     drawer: {

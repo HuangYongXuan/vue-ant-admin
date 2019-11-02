@@ -103,3 +103,10 @@
 .ant-drawer-content-wrapper {
   max-width: 100%;
 }
+
+.ant-btn {
+  margin-right: 5px;
+  &:last-child {
+    margin-right: 0;
+  }
+}

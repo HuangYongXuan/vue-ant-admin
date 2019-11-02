@@ -1,9 +1,13 @@
+let setting = {
+    tableSize: 'small',
+    tableActionBtnSize: 'small',
+    tableShowActionBtnText: false
+};
+
 export default {
     state: {
         theme: 'dark',
-        setting: {
-            tableSize: 'small'
-        }
+        setting
     },
     mutations: {
         SET_THEME(state, theme) {
@@ -17,6 +21,12 @@ export default {
     },
     getters: {
         theme: (s) => s.theme,
-        setting: s => s.setting
+        setting: s => {
+            if (s.setting) {
+                return s.setting;
+            } else {
+                return setting;
+            }
+        }
     }
 };
