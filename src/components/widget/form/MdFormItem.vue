@@ -59,14 +59,21 @@
             this.$bus.emit('md-form-remove-field' + this.mdForm.id, this);
         },
         methods: {
-            validator() {
-                let v = validator.make(this.mdForm.model, this.mdForm.rules, this.errorCustomMessages, this.fieldName);
-                if (v.fails()) {
-                    this.errorMsg = v.getErrors()[this.prop];
-                    return false;
+            async validator() {
+                let data = {
+                    name: this.mdForm.model[this.prop]
+                };
+                let rule = {
+                    name: this.mdForm.rules[this.prop]
+                };
+                let v = validator.make(data, rule, this.errorCustomMessages, this.fieldName);
+                let fails = await v.fails();
+                if (fails) {
+                    this.errorMsg = v.getErrors()['name'];
+                } else {
+                    this.errorMsg = [];
                 }
-                this.errorMsg = [];
-                return true;
+                return !fails;
             },
             addEvent() {
 
@@ -96,7 +103,7 @@
 
             &.md-required {
                 /*color: #ff3949;*/
-                &:before{
+                &:before {
                     content: '*';
                     position: absolute;
                     left: 0;

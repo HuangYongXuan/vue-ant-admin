@@ -10,7 +10,7 @@ export default {
     },
     data() {
         return {
-            data: this.value,
+            data: this.value
         };
     },
     created() {
@@ -18,16 +18,24 @@ export default {
     methods: {
         onSubmit() {
             this.$emit('submit', this.data);
+        },
+        watchData() {
+
+        },
+        watchValue() {
+
         }
     },
     watch: {
         async value(n) {
             await this.$nextTick();
             this.data = n;
+            this.watchValue();
         },
         async data() {
             await this.$nextTick();
             this.$emit('input', this.data);
+            this.watchData();
         }
     }
 };

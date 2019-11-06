@@ -20,7 +20,7 @@
             <role-multiple-selector v-model="data.roles"/>
         </md-form-item>
         <md-form-item label="超级版主" prop="moderatorId" :error-custom-messages="moderatorIdErrorMsg" show-one-error>
-            <user-selector v-model="data.moderatorId"/>
+            <user-selector v-model="data.moderatorId" :def-value="defaultUserValue"/>
         </md-form-item>
         <md-form-item label="排序" prop="sortId">
             <a-input-number v-model="data.sortId"/> 数字越大越靠前
@@ -65,8 +65,26 @@
                     required: "请选择用户",
                     integer: '请选择用户',
                     min: '请选择用户'
+                },
+                defaultUserValue: {
+                    id: '',
+                    label: ''
                 }
             };
+        },
+        mounted() {
+            this.setDefaultUserValue()
+        },
+        methods: {
+            watchData () {
+                this.setDefaultUserValue();
+            },
+            setDefaultUserValue () {
+                this.defaultUserValue = {
+                    id: this.data.id,
+                    label: this.data.username
+                }
+            }
         }
     };
 </script>

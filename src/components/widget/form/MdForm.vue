@@ -40,24 +40,25 @@
                 this.validator().then(() => {
                     this.$emit('submit');
                 }).catch(() => {
-                    this.$message.warning('表单数据验证失败')
+                    this.$message.warning('表单数据验证失败');
                 });
             },
-            validator() {
-                return new Promise(((resolve, reject) => {
+            async validator() {
+                return await new Promise(async (resolve, reject) => {
                     let isSuccess = true;
-                    this.fields.forEach(field => {
-                        if (field.validator()) {
-                            isSuccess = false;
+                    for (let i = 0; i < this.fields.length; i++) {
+                        let field = this.fields[i];
+                        let success = await field.validator();
+                        console.info(success, field.errorMsg);
+                        if (!success) {
+                            isSuccess = success;
                         }
-                    });
-
-                    if (isSuccess) {
-                        return reject();
-                    } else {
-                        return resolve();
                     }
-                }));
+                    if (!isSuccess) {
+                        return reject();
+                    }
+                    return  resolve()
+                });
             }
         },
         created() {

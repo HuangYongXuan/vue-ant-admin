@@ -1,4 +1,4 @@
-import {message} from 'ant-design-vue';
+import {message, Modal} from 'ant-design-vue';
 
 export const Utils = {
     routeMeta(name, hidden, only, perms, icon) {
@@ -16,14 +16,14 @@ export const Utils = {
     async responseHandler(response, showSuccess = false, showError = true, successMsg = undefined, errorMsg = undefined) {
         if (response.data.success === true) {
             if (showSuccess) {
-                message.success(successMsg || response.data.message, 2)
+                message.success(successMsg || response.data.message, 2);
             }
             return Promise.resolve(response.data);
         } else {
             if (showError) {
                 message.error(errorMsg || response.data.message, 2);
             }
-            return  Promise.reject(response);
+            return Promise.reject(response);
         }
     },
     genTabColumn(t, k, w, di, a = 'center', slot = undefined, f = undefined) {
@@ -41,6 +41,19 @@ export const Utils = {
         }
 
         return column;
+    },
+    onConfirmDelete(content, api) {
+        Modal.confirm({
+            title: '警告',
+            content,
+            onOk() {
+                return new Promise((resolve, reject) => {
+                    api(resolve, reject);
+                }).catch(() => console.log('Oops errors!'));
+            },
+            onCancel() {
+            }
+        });
     }
 };
 

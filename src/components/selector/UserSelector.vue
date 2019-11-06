@@ -25,30 +25,24 @@
         name: 'UserSelector',
         mixins: [MdMVVMObject],
         props: {
-            value: String
+            value: String,
+            defValue: {
+                type: Object,
+                default: () => {
+                    return {id: '', label: ''};
+                }
+            }
         },
         data() {
             return {
                 fetching: true,
                 users: [],
-                v2: {
-                    key: '',
-                    label: ''
-                },
-                label: undefined
+                v2: this.defValue
             };
         },
-        computed: {
-            valueData: {
-                get () {
-                    return {
-                        key: this.data,
-                        label: this.label
-                    };
-                },
-                set(v) {
-                    console.info(v);
-                }
+        watch: {
+            defValue (n) {
+                this.v2 = n;
             }
         },
         mounted() {
@@ -67,11 +61,10 @@
                     });
                 }).finally(() => this.fetching = false);
             },
-            handleChange({key, label}) {
+            handleChange({key}) {
                 this.data = key;
-                this.label = label;
             }
-        }
+        },
     };
 </script>
 

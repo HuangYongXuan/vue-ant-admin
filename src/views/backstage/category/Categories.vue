@@ -45,11 +45,13 @@
                 </a-table-column>
                 <a-table-column title="操作" align="right" key="action" :width="200">
                     <template slot-scope="text, record">
-                        <a-button icon="edit" type="primary" :size="_setting.tableActionBtnSize">
+                        <a-button icon="edit" type="primary" :size="_setting.tableActionBtnSize"
+                                  @click="onEditCategory(record)">
                             <span v-if="_setting.tableShowActionBtnText">编辑</span>
                         </a-button>
-                        <a-button icon="delete" type="danger" :size="_setting.tableActionBtnSize">
-                            <span v-if="_setting.tableShowActionBtnText">编辑</span>
+                        <a-button icon="delete" type="danger" :size="_setting.tableActionBtnSize"
+                                  @click="deleteCategory(record)">
+                            <span v-if="_setting.tableShowActionBtnText">删除</span>
                         </a-button>
                     </template>
                 </a-table-column>
@@ -67,6 +69,11 @@
         <md-drawer :md-active.sync="status.drawer.create" width="400" title="创建分类">
             <a-spin :spinning="spinning2">
                 <forums-category-form v-model="form" @submit="onCreateSubmit"></forums-category-form>
+            </a-spin>
+        </md-drawer>
+        <md-drawer :md-active.sync="status.drawer.edit" width="400" :title="'编辑['+status.data.old.name+']分类'">
+            <a-spin :spinning="spinning2">
+                <forums-category-form v-model="status.data.edit" @submit="onEditSubmit"></forums-category-form>
             </a-spin>
         </md-drawer>
     </div>
@@ -93,13 +100,18 @@
                     size: 20
                 },
                 queryRules: {
-                    name: ['between:1,32', 'string']
+                    name: ['between:1,32', 'string', 'nullable']
                 },
                 data: [],
                 pageCount: 0,
                 status: {
                     drawer: {
-                        create: false
+                        create: false,
+                        edit: false
+                    },
+                    data: {
+                        edit: {},
+                        old: {}
                     }
                 },
                 form: {}
@@ -129,6 +141,45 @@
                         this.status.drawer.create = false;
                         this.form = {};
                         this.getData(true);
+                    });
+                }).finally(() => this.spinning2 = false);
+            },
+            deleteCategory(record) {
+                this.$utils.onConfirmDelete(`是否删除${record.name}?`, (resolve, reject) => {
+                    category.deleted(record.id).then(res => {
+                        this.$utils.responseHandler(res, true, true).then(() => {
+                            resolve();
+                            this.getData(true);
+                        });
+                    }).catch(() => resolve());
+                });
+            },
+            onEditCategory(record) {
+                this.status.data.edit = {};
+                this.spinning2 = true;
+                this.status.drawer.edit = true;
+                category.get(record.id, {params: {roles: true}}).then(res => {
+                    this.$utils.responseHandler(res, false).then(({data}) => {
+                        if (data.roles) {
+                            data.roles = data.roles.map(item => {
+                               return item.rolesId
+                            });
+                        } else {
+                            data.roles = []
+                        }
+                        this.status.data.old = data;
+                        this.status.data.edit = Object.assign({}, data);
+                    }).catch(() =>this.status.drawer.edit = false)
+                }).catch(() =>this.status.drawer.edit = false).finally(() => {
+                    this.spinning2 = false;
+                });
+            },
+            onEditSubmit() {
+                this.spinning2 = true;
+                category.update(this.status.data.old.id, this.status.data.edit).then(res => {
+                    this.$utils.responseHandler(res, true, true).then(() => {
+                        this.getData();
+                        this.status.drawer.edit = false;
                     });
                 }).finally(() => this.spinning2 = false);
             }

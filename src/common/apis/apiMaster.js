@@ -12,7 +12,7 @@ export default class ApiMaster {
      * @returns {Promise<AxiosResponse<T>>}
      */
     created(data, config = {}) {
-        return Request.post(this.getUrl('/'), data, config);
+        return Request.post(this.prefix, data, config);
     }
 
     /**
@@ -47,10 +47,11 @@ export default class ApiMaster {
 
     /**
      * 删除接口
-     * @param config
+     * @param id  {string}
+     * @param config {AxiosRequestConfig}
      * @returns {Promise<AxiosResponse<T>>}
      */
-    deleted(config) {
+    deleted(id, config = {}) {
         return Request.delete(this.getUrl(id), config);
     }
 

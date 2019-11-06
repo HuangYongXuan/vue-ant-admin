@@ -1,5 +1,7 @@
 import userApi from '@/common/apis/user';
 import Utils from '@/common/Utils';
+import Request from '@/common/Request';
+
 
 export default {
     state: {
@@ -18,6 +20,7 @@ export default {
         },
         setToken(s, t) {
             s.token = t;
+            Request.defaults.headers['Authorization'] = 'Bearer ' + t || '';
         },
         setExpiresIn(s, e) {
             s.expiresIn = e;
