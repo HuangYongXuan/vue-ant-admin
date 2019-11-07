@@ -32,5 +32,13 @@ Vue.mixin({
     },
     computed: {
         ...Vuex.mapGetters({_theme: 'theme', _setting: 'setting'})
+    },
+    methods: {
+        _getImageFullPath(url) {
+            if (/^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/i.test(url)) {
+                return url;
+            }
+            return process.env.VUE_APP_STATIC_RESOURCE_URL + url;
+        }
     }
 });

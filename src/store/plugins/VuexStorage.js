@@ -1,3 +1,5 @@
+import {setting} from '@/store/modules/Setting';
+
 export const merge = (into, from) => {
     return Object.assign({}, into, from);
 };
@@ -21,7 +23,11 @@ export default class VuexLocalSync {
         });
         this.plugin = (store) => {
             const savedState = this.restoreState(this.key, this.storage);
-
+            if (savedState && savedState.Setting && savedState.Setting.setting) {
+                for (let key in setting) {
+                    savedState.Setting.setting[key] = savedState.Setting.setting[key] || setting[key];
+                }
+            }
             let newState = merge(store.state, savedState || {});
             try {
                 store.commit('setToken', newState.User.token);

@@ -1,6 +1,8 @@
 @import "~ant-design-vue/dist/antd.css";
 
 .md-form-item.is-error {
+  .ant-select-selection,
+  .ant-input-number,
   input {
     border-color: #ff3949;
   }

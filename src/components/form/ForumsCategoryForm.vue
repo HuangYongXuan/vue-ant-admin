@@ -12,9 +12,8 @@
         <md-form-item label="是否启用" prop="isEnabled">
             <a-switch v-model="data.isEnabled"/>
         </md-form-item>
-        <md-form-item label="是否限制" prop="isRoleAccess">
+        <md-form-item label="是否限制" prop="isRoleAccess" help-msg="只有选择的角色才能访问">
             <a-switch v-model="data.isRoleAccess"/>
-            <span> 只有选择的角色才能访问</span>
         </md-form-item>
         <md-form-item label="选择角色" prop="roles" v-if="data.isRoleAccess">
             <role-multiple-selector v-model="data.roles"/>
@@ -22,8 +21,8 @@
         <md-form-item label="超级版主" prop="moderatorId" :error-custom-messages="moderatorIdErrorMsg" show-one-error>
             <user-selector v-model="data.moderatorId" :def-value="defaultUserValue"/>
         </md-form-item>
-        <md-form-item label="排序" prop="sortId">
-            <a-input-number v-model="data.sortId"/> 数字越大越靠前
+        <md-form-item label="排序" prop="sortId" help-msg="数字越大越靠前">
+            <a-input-number v-model="data.sortId" class="md-block"/>
         </md-form-item>
         <md-form-item label="描述" prop="description">
             <a-input v-model="data.description" type="textarea" class="md-block"/>

@@ -1,7 +1,7 @@
 <template>
     <div class="md-role-multiple-selector">
         <a-select mode="multiple" v-model="data">
-            <a-select-option v-for="(r,i) in roles" :value="r.id">{{r.displayName}}</a-select-option>
+            <a-select-option v-for="(r, i) in roles" :value="r.id" :key="i">{{r.displayName}}</a-select-option>
         </a-select>
     </div>
 </template>

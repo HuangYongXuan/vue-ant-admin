@@ -7,9 +7,12 @@
         <div class="md-form-input">
             <slot/>
             <div class="md-form-error" :class="mdForm.inlineError === true ? 'md-form-error-inline' : ''">
-                <transition-group name="list" tag="ul">
-                    <li v-for="(e,i) in errorMsg" :key="e" v-if="(showOneError && i===0) || !showOneError">{{e}}</li>
+                <transition-group tag="ul" name="slide-fade" mode="out-in">
+                    <li v-for="(e,i) in errorMsg" :key="e" v-if="errorMsg && errorMsg.length > 0 && ((showOneError && i===0) || !showOneError)">{{e}}</li>
                 </transition-group>
+                <transition name="slide-fade" mode="out-in">
+                    <p class="md-help-msg" v-if="errorMsg && errorMsg.length <= 0 && helpMsg">{{helpMsg}}</p>
+                </transition>
             </div>
         </div>
     </div>
@@ -30,6 +33,7 @@
                 type: String,
                 default: () => generateUuid('v-f-i-')
             },
+            helpMsg: String,
             align: String,
             errorCustomMessages: Object,
             fieldName: Object
@@ -121,6 +125,7 @@
         .md-form-error {
             color: #ff3949;
             min-height: 22px;
+            position: relative;
 
             ul {
                 margin: 0;
@@ -129,6 +134,18 @@
                 padding: 0;
                 line-height: 22px;
             }
+        }
+        .md-help-msg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            text-align: right;
+            font-size: 10px;
+            line-height: 22px;
+            color: #777;
+            margin: 0;
+            padding: 0;
         }
     }
 

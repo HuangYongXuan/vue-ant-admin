@@ -15,6 +15,7 @@
     "core-js": "^3.3.2",
     "el-form-validator": "^1.0.15",
     "nprogress": "^0.2.0",
+    "tinymce": "^5.1.1",
     "vue": "^2.6.10",
     "vue-bus": "^1.2.1",
     "vue-router": "^3.1.3",

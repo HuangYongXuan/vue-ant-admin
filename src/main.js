@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import Vue from 'vue';
-import Ant from 'ant-design-vue';
+import antd from 'ant-design-vue';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
@@ -10,7 +10,7 @@ import '@/common/VTheme';
 import '@/assets/sass/app.scss';
 import '@/router/RouterHook'
 
-Vue.use(Ant);
+Vue.use(antd);
 Vue.use(VueBus);
 
 Vue.config.productionTip = false;
