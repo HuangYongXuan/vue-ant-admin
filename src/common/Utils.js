@@ -54,6 +54,27 @@ export const Utils = {
             onCancel() {
             }
         });
+    },
+    loadScript (id, url) {
+        let el = document.getElementById(id);
+
+        return new Promise((resolve, reject) => {
+            if (el === null) {
+                let script = document.createElement('script');
+                script.setAttribute('id', id);
+                script.type = 'text/javascript';
+                script.src = url;
+                script.onload = () => {
+                    return resolve();
+                };
+                script.error = (err) => {
+                    return reject(err);
+                };
+                document.body.appendChild(script);
+            } else {
+                return resolve();
+            }
+        });
     }
 };
 

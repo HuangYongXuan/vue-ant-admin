@@ -40,6 +40,9 @@
             },
             onClose() {
                 this.show = false;
+            },
+            showWatch () {
+                this.$bus.emit('side-on-collapse', this.show)
             }
         },
         beforeDestroy() {
