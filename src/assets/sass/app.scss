@@ -108,7 +108,29 @@
 
 .ant-btn {
   margin-right: 5px;
+
   &:last-child {
     margin-right: 0;
+  }
+}
+
+.md-scroll-bar {
+  &::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+  }
+
+  &::-webkit-scrollbar { //滚动条的宽度
+    width: 9px;
+    height: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb { //滚动条的设置
+    background-color: #dddddd;
+    background-clip: padding-box;
+    min-height: 28px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
   }
 }

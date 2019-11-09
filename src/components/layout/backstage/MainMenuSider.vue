@@ -1,9 +1,9 @@
 <template>
-    <a-layout-sider class="md-main-menu-sider" :width="menuWidth" :collapsible="collapsible" :trigger="null"
+    <a-layout-sider class="md-main-menu-sider md-scroll-bar" :width="menuWidth" :collapsible="collapsible" :trigger="null"
                     v-model="show" :theme="_theme" breakpoint="xl" v-if="width > 576">
-        <main-menu-sider-content :collapsible="show"/>
+        <main-menu-sider-content :collapsed="show"/>
     </a-layout-sider>
-    <a-drawer class="md-main-menu-sider" v-else :mask="true" :closable="false" :visible.sync="show" :theme="_theme"
+    <a-drawer class="md-main-menu-sider md-scroll-bar" v-else :mask="true" :closable="false" :visible.sync="show" :theme="_theme"
               placement="left" @close="onClose" :width="menuWidth" :wrap-class-name="'v-theme-' + _theme">
         <main-menu-sider-content @change="show = false"/>
     </a-drawer>
@@ -45,8 +45,8 @@
             onClose() {
                 this.show = false;
             },
-            showWatch () {
-                this.$bus.emit('side-on-collapse', this.show)
+            showWatch() {
+                this.$bus.emit('side-on-collapse', this.show);
             }
         },
         beforeDestroy() {
@@ -57,6 +57,11 @@
 
 <style scoped lang="scss">
     .md-main-menu-sider {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100vh;
+        left: 0;
+
         &.ant-layout-sider {
             border-right: 1px solid #e3e3e3;
         }

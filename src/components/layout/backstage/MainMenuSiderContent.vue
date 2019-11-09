@@ -39,7 +39,7 @@
                 <h1>RUOYI ANT</h1>
             </router-link>
         </div>
-        <a-menu mode="inline" :openKeys.sync="getOpenKeys" @click="onClick" :theme="_theme"
+        <a-menu mode="inline" :openKeys.sync="openKeys" @click="onClick" :theme="_theme"
                 :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
             <a-sub-menu key="Category">
                 <span slot="title"><a-icon type="shop"/><span>Category</span></span>
@@ -47,7 +47,10 @@
                 <a-menu-item key="Classes" @click="$router.push({name: 'Classes'})">Classes</a-menu-item>
                 <a-menu-item key="Types" @click="$router.push({name: 'Types'})">Types</a-menu-item>
             </a-sub-menu>
-<!--            <a-menu-item v-for="i in 30" :key="'mmm' +i"><a-icon type="menu"/>Menu {{i + 1}}</a-menu-item>-->
+            <a-menu-item v-for="i in 30" :key="'mmm' +i">
+                <a-icon type="menu"/>
+                <span>Menu {{i}}</span>
+            </a-menu-item>
         </a-menu>
     </div>
 </template>
@@ -56,7 +59,7 @@
     export default {
         name: 'MainMenuSiderContent',
         props: {
-            collapsible: {
+            collapsed: {
                 type: Boolean,
                 required: false,
                 default: false
@@ -67,37 +70,28 @@
                 openKeys: [],
                 defaultOpenKeys: [],
                 selectedKeys: [],
+                cachedOpenKeys: [],
                 width: undefined
             };
         },
         created() {
             this.setDefaultOpenKeys();
         },
-        computed: {
-            getOpenKeys: {
-                get() {
-                    if (this.collapsible) return [];
-                    return this.openKeys;
-                },
-                set(v) {
-                    this.openKeys = v;
-                }
-            }
-        },
+        computed: {},
         methods: {
             onClick() {
                 this.$emit('change');
             },
             setDefaultOpenKeys() {
-                let keys = [];
-                this.$route.matched.forEach(r => {
-                    if (r.name !== 'Backstage') {
-                        keys.push(r.name);
-                    }
+                let routes = this.$route.matched.concat();
+                console.info(routes);
+                if (routes.length > 0) {
+                    this.selectedKeys = [routes.pop().name];
+                }
+                const openKeys = routes.map(item => {
+                    return item.name;
                 });
-                this.openKeys = keys;
-                this.defaultOpenKeys = [this.$route.name];
-                this.selectedKeys = keys;
+                this.collapsed ? (this.cachedOpenKeys = openKeys) : (this.openKeys = openKeys);
             }
         },
         watch: {
@@ -105,6 +99,14 @@
                 this.$nextTick(() => {
                     this.setDefaultOpenKeys();
                 });
+            },
+            collapsed(val) {
+                if (val) {
+                    this.cachedOpenKeys = this.openKeys.concat();
+                    this.openKeys = [];
+                } else {
+                    this.openKeys = this.cachedOpenKeys;
+                }
             }
         }
     };
