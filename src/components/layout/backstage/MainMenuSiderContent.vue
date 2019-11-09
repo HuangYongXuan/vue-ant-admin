@@ -84,7 +84,7 @@
             },
             setDefaultOpenKeys() {
                 let routes = this.$route.matched.concat();
-                console.info(routes);
+
                 if (routes.length > 0) {
                     this.selectedKeys = [routes.pop().name];
                 }

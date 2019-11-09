@@ -15,7 +15,7 @@
         props: {
             id: {
                 type: String,
-                default: generateUuid('charts-')
+                default: () => generateUuid('charts-')
             },
             width: {
                 type: String | Number,
