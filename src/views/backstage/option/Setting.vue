@@ -1,16 +1,20 @@
 <template>
     <div class="md-setting">
-        <md-markdown/>
+        <md-json-editor v-model="data"/>
     </div>
 </template>
 
 <script>
 
-    import MdMarkdown from '@/components/widget/chart/MdMarkdown';
+    import MdJsonEditor from '@/components/widget/editor/MdJsonEditor';
     export default {
-        components: {MdMarkdown},
+        components: {MdJsonEditor},
         data() {
             return {
+                data: {
+                    id: '123',
+                    name: '789'
+                }
             };
         }
     };

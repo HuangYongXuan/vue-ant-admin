@@ -11,11 +11,12 @@
   "dependencies": {
     "ant-design-vue": "^1.4.3",
     "axios": "^0.19.0",
-    "babel-polyfill": "^6.26.0",
     "chart.js": "^2.9.2",
+    "codemirror": "^5.49.2",
     "core-js": "^3.3.2",
     "echarts": "^4.4.0",
     "el-form-validator": "^1.0.15",
+    "jsonlint": "^1.6.3",
     "nprogress": "^0.2.0",
     "tinymce": "^5.1.1",
     "vue": "^2.6.10",
@@ -27,11 +28,13 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
+    "babel-polyfill": "^6.26.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "happypack": "^5.0.1",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
+    "script-loader": "^0.7.2",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {
