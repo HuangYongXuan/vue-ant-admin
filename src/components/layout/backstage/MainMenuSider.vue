@@ -12,6 +12,7 @@
 <script>
     import MdActive from '@/components/mixins/MdActive';
     import MainMenuSiderContent from '@/components/layout/backstage/MainMenuSiderContent';
+    import Debounce from '@/common/class/Debounce';
 
     export default {
         name: 'MainMenuSider',
@@ -27,7 +28,8 @@
         data() {
             return {
                 width: undefined,
-                menuWidth: 256
+                menuWidth: 256,
+                debounce: new Debounce()
             };
         },
         created() {
@@ -36,7 +38,9 @@
         },
         methods: {
             resize() {
-                this.width = window.innerWidth;
+                this.debounce.do(() => {
+                    this.width = window.innerWidth;
+                }, 300);
             },
             onClose() {
                 this.show = false;

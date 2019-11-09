@@ -40,13 +40,14 @@
             </router-link>
         </div>
         <a-menu mode="inline" :openKeys.sync="getOpenKeys" @click="onClick" :theme="_theme"
-                 :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
+                :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
             <a-sub-menu key="Category">
                 <span slot="title"><a-icon type="shop"/><span>Category</span></span>
                 <a-menu-item key="Categories" @click="$router.push({name: 'Categories'})">Categories</a-menu-item>
                 <a-menu-item key="Classes" @click="$router.push({name: 'Classes'})">Classes</a-menu-item>
                 <a-menu-item key="Types" @click="$router.push({name: 'Types'})">Types</a-menu-item>
             </a-sub-menu>
+<!--            <a-menu-item v-for="i in 30" :key="'mmm' +i"><a-icon type="menu"/>Menu {{i + 1}}</a-menu-item>-->
         </a-menu>
     </div>
 </template>
@@ -74,18 +75,18 @@
         },
         computed: {
             getOpenKeys: {
-                get () {
+                get() {
                     if (this.collapsible) return [];
                     return this.openKeys;
                 },
-                set (v) {
-                    this.openKeys = v
+                set(v) {
+                    this.openKeys = v;
                 }
             }
         },
         methods: {
             onClick() {
-                this.$emit('change')
+                this.$emit('change');
             },
             setDefaultOpenKeys() {
                 let keys = [];
@@ -111,6 +112,7 @@
 
 <style scoped lang="scss">
     .md-main-menu-sider {
+
         .v-theme-dark {
             background: #002140;
 

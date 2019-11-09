@@ -22,14 +22,15 @@ const assetsCDN = {
 
 module.exports = {
     configureWebpack: config => {
-        config.externals = {
-            'tinymce': 'tinymce',
-            'vue': 'Vue',
-            'axios': 'axios',
-            'vue-router': 'VueRouter',
-            'vuex': 'Vuex',
-            'ant-design-vue': 'antd'
-        };
+        if (process.env.NODE_ENV === 'production') {
+            config.externals = {
+                'vue': 'Vue',
+                'axios': 'axios',
+                'vue-router': 'VueRouter',
+                'vuex': 'Vuex',
+                'ant-design-vue': 'antd',
+            };
+        }
         config.plugins.push(new HappyPack({
             id: 'babel',
             loaders: ['babel-loader?cacheDirectory=true'],
@@ -37,10 +38,12 @@ module.exports = {
         }));
     },
     chainWebpack: config => {
-        config.plugin('html').tap(args => {
-            args[0].cdn = assetsCDN;
-            return args;
-        });
+        if (process.env.NODE_ENV === 'production') {
+            config.plugin('html').tap(args => {
+                args[0].cdn = assetsCDN;
+                return args;
+            });
+        }
     },
     devServer: {
         port: 9000,
