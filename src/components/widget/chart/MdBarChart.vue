@@ -3,7 +3,6 @@
 </template>
 
 <script>
-    import Charts from 'chart.js';
     import MdBaseChart from '@/components/widget/chart/MdBaseChart';
 
     export default {
