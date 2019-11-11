@@ -55,7 +55,8 @@ export const Utils = {
             }
         });
     },
-    loadScript (id, url) {
+    loadScript(id, url) {
+        id = id + '-' + generateUuid();
         let el = document.getElementById(id);
 
         return new Promise((resolve, reject) => {
@@ -65,6 +66,7 @@ export const Utils = {
                 script.type = 'text/javascript';
                 script.src = url;
                 script.onload = () => {
+                    script.remove();
                     return resolve();
                 };
                 script.error = (err) => {
@@ -75,6 +77,20 @@ export const Utils = {
                 return resolve();
             }
         });
+    },
+    /**
+     *
+     * @param id
+     * @param urls
+     * @returns {Promise<unknown[]>}
+     */
+    loadScripts(id, urls) {
+        let results = [];
+        urls.forEach((url, index) => {
+            results.push(this.loadScript(id + index, url));
+        });
+
+        return Promise.all(results);
     }
 };
 
