@@ -28,10 +28,10 @@
                     </template>
                 </a-table-column>
                 <a-table-column title="图标" data-index="icon" align="center" key="icon" :width="50">
-                    <a-avatar slot-scope="icon" :src="icon" :size="10"></a-avatar>
+                    <a-avatar slot-scope="icon" :src="icon" :size="10" @click="onShowImagePreview(icon)"/>
                 </a-table-column>
                 <a-table-column title="大图" data-index="banner" align="center" key="banner" :width="50">
-                    <img slot-scope="banner" :src="banner" alt="" height="10px">
+                    <img slot-scope="banner" :src="banner" alt="" height="10px" @click="onShowImagePreview(banner)">
                 </a-table-column>
                 <a-table-column title="是否启用" data-index="isEnabled" align="center" key="isEnabled" :width="80">
                     <a-switch slot-scope="isEnabled" :checked="isEnabled" disabled/>
@@ -76,6 +76,7 @@
                 <forums-category-form v-model="status.data.edit" @submit="onEditSubmit"></forums-category-form>
             </a-spin>
         </md-drawer>
+        <md-image-preview :md-active.sync="showPreview" :src="src"/>
     </div>
 </template>
 
@@ -87,9 +88,10 @@
     import ResponsiveCol from '@/components/widget/ResponsiveCol';
     import MdDrawer from '@/components/widget/MdDrawer';
     import ForumsCategoryForm from '@/components/form/ForumsCategoryForm';
+    import MdImagePreview from '@/components/widget/MdImagePreview';
 
     export default {
-        components: {ForumsCategoryForm, MdDrawer, ResponsiveCol, FormatDatetime, MdFormItem, MdForm},
+        components: {MdImagePreview, ForumsCategoryForm, MdDrawer, ResponsiveCol, FormatDatetime, MdFormItem, MdForm},
         data() {
             return {
                 spinning: true,
@@ -114,7 +116,9 @@
                         old: {}
                     }
                 },
-                form: {}
+                form: {},
+                showPreview: false,
+                src: undefined
             };
         },
         mounted() {
@@ -182,6 +186,10 @@
                         this.status.drawer.edit = false;
                     });
                 }).finally(() => this.spinning2 = false);
+            },
+            onShowImagePreview (src) {
+                this.src = src;
+                this.showPreview = true;
             }
         }
     };
