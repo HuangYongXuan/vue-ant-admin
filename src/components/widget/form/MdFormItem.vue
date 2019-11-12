@@ -8,7 +8,9 @@
             <slot/>
             <div class="md-form-error" :class="mdForm.inlineError === true ? 'md-form-error-inline' : ''">
                 <transition-group tag="ul" name="slide-fade" mode="out-in">
-                    <li v-for="(e,i) in errorMsg" :key="e" v-if="errorMsg && errorMsg.length > 0 && ((showOneError && i===0) || !showOneError)">{{e}}</li>
+                    <li v-for="(e,i) in errorMsg" :key="e"
+                        v-if="errorMsg && errorMsg.length > 0 && ((showOneError && i===0) || !showOneError)">{{e}}
+                    </li>
                 </transition-group>
                 <transition name="slide-fade" mode="out-in">
                     <p class="md-help-msg" v-if="errorMsg && errorMsg.length <= 0 && helpMsg">{{helpMsg}}</p>
@@ -36,12 +38,16 @@
             helpMsg: String,
             align: String,
             errorCustomMessages: Object,
-            fieldName: Object
+            fieldName: Object,
+            error: {
+                type: Array,
+                default: () => []
+            }
         },
         inject: ['mdForm'],
         data() {
             return {
-                errorMsg: []
+                errorMsg: this.error
             };
         },
         computed: {
@@ -87,6 +93,11 @@
             },
             onInput() {
                 this.validator();
+            }
+        },
+        watch: {
+            error(e) {
+                this.errorMsg = e;
             }
         }
     };
@@ -135,6 +146,7 @@
                 line-height: 22px;
             }
         }
+
         .md-help-msg {
             position: absolute;
             left: 0;
