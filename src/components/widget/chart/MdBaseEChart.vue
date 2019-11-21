@@ -5,6 +5,7 @@
 
 <script>
     import {generateUuid} from '@/common/Utils';
+    import Debounce from '@/common/class/Debounce';
 
     export default {
         name: 'MdBaseEChart',
@@ -29,7 +30,8 @@
         },
         data() {
             return {
-                chart: null
+                chart: null,
+                debounce: new Debounce()
             };
         },
         created() {
@@ -40,10 +42,11 @@
                 if (!this.intercept) {
                     this.init();
                 } else {
-                    this.intercept()
+                    this.intercept();
                 }
             });
             this.$bus.on('side-on-collapse', this.update);
+            window.addEventListener('resize', this._forceUpdate);
         },
         methods: {
             init() {
@@ -57,9 +60,16 @@
                         this.chart.resize();
                     }, 300);
                 }
+            },
+            _forceUpdate() {
+                if (!this.chart) return;
+                this.debounce.do(() => {
+                    this.chart.resize();
+                }, 200);
             }
         },
         beforeDestroy() {
+            window.removeEventListener('resize', this._forceUpdate);
             if (!this.chart) {
                 return;
             }

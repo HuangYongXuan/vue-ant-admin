@@ -1,6 +1,10 @@
 @import "~ant-design-vue/dist/antd.css";
 @import "transition";
 
+.md-container {
+  padding: 10px;
+}
+
 .md-form-item.is-error {
   .ant-select-selection,
   .ant-input-number,

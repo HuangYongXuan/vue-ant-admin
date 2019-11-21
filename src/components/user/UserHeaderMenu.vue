@@ -2,12 +2,12 @@
     <a-menu :theme="_theme" class="md-user-header-menu" mode="horizontal" :selectable="false">
         <slot/>
         <a-dropdown :trigger="['click']" v-if="loginStatus">
-            <div class="md-link">
-                <div class="submenu-title-wrapper md-link">
+            <span class="md-user-data">
+                <span class="submenu-title-wrapper md-link">
                     <a-avatar :size="32" :src="userInfo.avatar"/>
                     {{userInfo.username}}
-                </div>
-            </div>
+                </span>
+            </span>
             <a-menu slot="overlay">
                 <a-menu-item-group title="SYSTEM" class="md-list">
                     <slot name="system"/>
@@ -75,6 +75,11 @@
         flex: 0;
         display: inline-block;
         line-height: 64px;
+    }
+
+    .md-user-data {
+        display: inline-block;
+        margin-right: 10px;
     }
 </style>
 
