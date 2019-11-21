@@ -7,19 +7,18 @@
             </responsive-col>
         </a-row>
         <a-row :gutter="16">
-            <responsive-col :span="6" v-for="(c, i) in cards" :key="i">
-                <md-data-card :icon="c.icon" :icon-style="c.iconStyle" :title="c.title" :subtitle="c.subtitle"
-                              :left-norm="c.leftNorm" :right-norm="c.rightNorm" :norm-color="c.normColor" :to="{}"/>
+            <responsive-col :span="6" v-for="(n, i) in nums" :key="i">
+                <md-status-card :header="n.h" :title="n.title" :icon="n.icon" :color="n.color" :switched="n.switched"/>
             </responsive-col>
         </a-row>
-        <a-row :gutter="16">
-            <a-col :span="12" :xs="24">
+        <a-row :gutter="16" class="md-chart-row">
+            <a-col :span="12" :xs="24" :sm="24" :md="12">
                 <md-base-e-chart :options="options" height="400px"/>
             </a-col>
-            <responsive-col :span="6">
+            <responsive-col>
                 <md-base-e-chart :options="options2" height="400px"/>
             </responsive-col>
-            <responsive-col :span="6">
+            <responsive-col>
                 <md-base-e-chart :options="options3" height="400px"/>
             </responsive-col>
             <a-col :span="24">
@@ -34,9 +33,10 @@
     import {option4} from '@/views/backstage/option/echartData';
     import MdDataCard from '@/components/widget/card/MdDataCard';
     import ResponsiveCol from '@/components/widget/ResponsiveCol';
+    import MdStatusCard from '@/components/widget/card/MdStatusCard';
 
     export default {
-        components: {ResponsiveCol, MdDataCard, MdBaseEChart},
+        components: {MdStatusCard, ResponsiveCol, MdDataCard, MdBaseEChart},
         data() {
             return {
                 options: {
@@ -244,6 +244,36 @@
                         },
                         normColor: '#2196f3'
                     }
+                ],
+                nums: [
+                    {
+                        h: '35%',
+                        title: 'GROWTH',
+                        icon: 'md-icon-airplanemode_active',
+                        switched: false,
+                        color: '#66bb6a'
+                    },
+                    {
+                        h: '42%',
+                        title: 'NEW USERS',
+                        icon: 'usergroup-add',
+                        switched: true,
+                        color: '#00bcd4'
+                    },
+                    {
+                        h: '37k',
+                        title: 'PROFIT',
+                        icon: 'md-icon-dollar',
+                        switched: false,
+                        color: '#ffc107'
+                    },
+                    {
+                        h: '25k',
+                        title: 'SALES',
+                        icon: 'shopping-cart',
+                        switched: true,
+                        color: '#ef5350'
+                    }
                 ]
             };
         },
@@ -254,7 +284,6 @@
         },
         methods: {
             intercept() {
-                let startTime = new Date().getTime();
                 this.$utils.loadScripts('ax-bd-', [
                     'https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js',
                     'https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js',
@@ -264,7 +293,6 @@
                     'https://api.map.baidu.com/getscript?v=2.0&ak=8E26vknnzSO3K48McCt3jcyUIjSsGGgw&services=&t=20191018173825',
                     'https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js'
                 ]).then(() => {
-                    console.info('time:', new Date().getTime() - startTime);
                     this.$refs.rf.init();
                 });
             }
@@ -274,9 +302,9 @@
 
 <style scoped lang="scss">
     .md-container {
-        .ant-row {
+        .md-chart-row {
             > div {
-                padding-bottom: 8px;
+                padding-bottom: 1.5rem;
                 padding-top: 8px;
 
                 > div {

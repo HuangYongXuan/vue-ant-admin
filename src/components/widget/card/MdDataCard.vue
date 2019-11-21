@@ -27,20 +27,13 @@
 
 <script>
     import MdIconFont from '@/components/widget/MdIconFont';
+    import MdCardMixin from '@/components/widget/card/MdCardMixin';
 
     export default {
         name: 'MdDataCard',
         components: {MdIconFont},
+        mixins: [MdCardMixin],
         props: {
-            icon: {
-                type: String
-            },
-            iconStyle: {
-                type: Object
-            },
-            title: {
-                type: String
-            },
             subtitle: {
                 type: String
             },
@@ -52,23 +45,6 @@
             },
             normColor: {
                 type: String
-            },
-            to: {
-                type: Object
-            }
-        },
-        computed: {
-            isIconFont() {
-                return this.icon && this.icon.indexOf('md-icon') !== -1;
-            },
-            isLink() {
-                return this.to;
-            }
-        },
-        methods: {
-            goto() {
-                if (this.isLink === false) return;
-                this.$router.push(this.to);
             }
         }
     };
