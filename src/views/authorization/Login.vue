@@ -27,7 +27,10 @@
                                 Don't have an account yet?
                                 <a @click="$router.push({name: 'Register'})">Sign up</a>
                             </p>
-                            <p class="text-center">Forgot your username or password? <a>Reset password</a> </p>
+                            <p class="text-center">
+                                Forgot your username or password?
+                                <a @click="$router.push({name: 'ForgotPassword'})">Reset password</a>
+                            </p>
                         </a-col>
                     </a-row>
                 </a-spin>

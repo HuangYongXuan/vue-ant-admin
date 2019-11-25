@@ -6,6 +6,11 @@
                :class="{'md-required': isRequired}">{{label}}</label>
         <div class="md-form-input">
             <slot/>
+        </div>
+        <div class="md-errors">
+            <div class="md-form-label"
+                 :style="{flex: '0 0 '+ mdForm.labelWidth}">
+            </div>
             <div class="md-form-error" :class="mdForm.inlineError === true ? 'md-form-error-inline' : ''">
                 <transition-group tag="ul" name="slide-fade" mode="out-in">
                     <li v-for="(e,i) in errorMsg" :key="e"
@@ -110,20 +115,20 @@
         padding-right: 10px;
 
         .md-form-label {
-            line-height: 30px;
             margin-right: 10px;
-            position: relative;
-            padding-left: 10px;
+            vertical-align: middle;
+            display: inline-flex;
+            min-height: 30px;
+            line-height: 100%;
+            align-items: center;
 
             &.md-required {
                 /*color: #ff3949;*/
                 &:before {
                     content: '*';
-                    position: absolute;
-                    left: 0;
-                    top: 0;
+                    display: inline;
+                    width: 10px;
                     color: #ff3949;
-                    line-height: 30px;
                 }
             }
         }
@@ -136,6 +141,8 @@
             color: #ff3949;
             min-height: 22px;
             position: relative;
+            text-align: right;
+            flex: 1;
 
             ul {
                 margin: 0;
@@ -160,8 +167,14 @@
         }
     }
 
+    .md-errors {
+        flex: 0 0 100%;
+        display: flex;
+    }
+
     .md-form-inline {
         display: inline-flex;
+        flex-wrap: wrap;
         padding-right: 10px;
         width: auto;
 

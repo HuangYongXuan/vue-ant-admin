@@ -49,7 +49,6 @@
                     for (let i = 0; i < this.fields.length; i++) {
                         let field = this.fields[i];
                         let success = await field.validator();
-                        console.info(success, field.errorMsg);
                         if (!success) {
                             isSuccess = success;
                         }

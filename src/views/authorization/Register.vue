@@ -1,7 +1,6 @@
 <template>
     <div class="v-register">
         <v-header-layout/>
-
         <a-row>
             <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
                    :md="12"></a-col>
