@@ -105,7 +105,6 @@
 
 <style scoped lang="scss">
     .md-form-item {
-        display: inline-flex;
         width: 100%;
         margin-top: 10px;
         padding-right: 10px;
@@ -162,6 +161,7 @@
     }
 
     .md-form-inline {
+        display: inline-flex;
         padding-right: 10px;
         width: auto;
 

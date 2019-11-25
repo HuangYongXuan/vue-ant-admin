@@ -15,7 +15,7 @@
     "codemirror": "^5.49.2",
     "core-js": "^3.3.2",
     "echarts": "^4.4.0",
-    "el-form-validator": "^1.0.15",
+    "el-form-validator": "^1.0.17",
     "jsonlint": "^1.6.3",
     "nprogress": "^0.2.0",
     "tinymce": "^5.1.1",

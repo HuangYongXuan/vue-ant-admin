@@ -1,14 +1,10 @@
 <template>
     <a-layout class="v-index">
-        <v-header-layout/>
-        <a-row>
-            <a-col :span="24">
-                <index-particle/>
-                <a-button class="v-btn" type="primary" shape="round" icon="plus" size="large"
-                          @click="$router.push({name: 'Register'})">Join
-                </a-button>
-            </a-col>
-        </a-row>
+        <v-header-layout class="md-header"/>
+        <index-particle :particles-num="150"/>
+        <a-button class="v-btn" type="primary" shape="round" icon="plus" size="large"
+                  @click="$router.push({name: 'Register'})">Join
+        </a-button>
     </a-layout>
 </template>
 
@@ -24,14 +20,17 @@
 <style scoped lang="scss">
     .v-index {
         height: 100%;
-        position: absolute;
+        position: relative;
+
+        .md-header {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 20;
+        }
 
         .ant-row {
-            height: 100%;
-
-            div {
-                height: 100%;
-            }
         }
 
         .v-btn {
