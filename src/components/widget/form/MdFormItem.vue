@@ -81,6 +81,11 @@
                 let rule = {
                     name: this.mdForm.rules[this.prop]
                 };
+
+                if (rule.name && rule.name.indexOf('confirmed') !== -1) {
+                    data.name_confirmation = this.mdForm.model[this.prop + '_confirmation']
+                }
+
                 let v = validator.make(data, rule, this.errorCustomMessages, this.fieldName);
                 let fails = await v.fails();
                 if (fails) {

@@ -25,7 +25,7 @@ export const auth = (data) => {
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const destroy = () => {
-    return Request.delete(`${baseUri}auth/destroy`)
+    return Request.delete(`${baseUri}auth/destroy`);
 };
 
 /**
@@ -34,7 +34,7 @@ export const destroy = () => {
  * @returns {Promise<AxiosResponse<T>>}
  */
 export const profile = (roles) => {
-    return Request.get(`${baseUri}profile`, {params: {roles}})
+    return Request.get(`${baseUri}profile`, {params: {roles}});
 };
 
 /**
@@ -45,10 +45,40 @@ export const tokenRefresh = () => {
     return Request.post(`${baseUri}token/refresh`);
 };
 
+/**
+ * 发送找回密码邮件
+ * @param email {string}
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const forgotPassword = (email) => {
+    return Request.post(`${baseUri}forgot-password`, {email});
+};
+
+/**
+ * 通过找回密码token 获取用户详情
+ * @param token
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const forgotPasswordInfo = (token) => {
+    return Request.get(`${baseUri}forgot-password/info`, {params: {token}});
+};
+
+/**
+ * 设置新的密码
+ * @param data {Object}
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const resetPassword = (data) => {
+    return Request.post(`${baseUri}reset-password`, data);
+};
+
 export default {
     create,
     auth,
     profile,
     tokenRefresh,
-    destroy
+    destroy,
+    forgotPassword,
+    forgotPasswordInfo,
+    resetPassword
 };
