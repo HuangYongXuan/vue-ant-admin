@@ -1,7 +1,7 @@
 <template>
-    <md-form :model="data" :rules="rules" @submit="onSubmit" :rel="formRef">
+    <md-form :model="data" :rules="rules" @submit="onSubmit">
         <md-form-item label="邮箱" prop="email">
-            <a-input v-model="data.email" placeholder="请输入邮箱地址" size="large"/>
+            <a-input v-model="data.email" placeholder="请输入电子邮箱" type="email" :autocomplete="false" size="large"/>
         </md-form-item>
         <a-button block html-type="submit" type="primary" size="large">Send Reset Instructions</a-button>
     </md-form>
@@ -19,7 +19,7 @@
         data() {
             return {
                 rules: {
-                    email: 'required|email'
+                    email: ['required', 'email'],
                 }
             };
         }
