@@ -1,10 +1,36 @@
 <template>
     <div class="v-register">
         <v-header-layout/>
+
         <a-row>
-            <a-col :xxl="9" :xs="0" :sm="4" :xl="8" :lg="8"/>
-            <a-col :xxl="6" :xs="24" :sm="16" :xl="8" :lg="8">
-                <user-register-form v-model="form" @submit="onRegister" class="v-form"></user-register-form>
+            <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
+                   :md="12"></a-col>
+            <a-col :span="12" :xs="24" :md="12">
+                <a-spin :spinning="spinning">
+                    <a-row>
+                        <a-col :xs="0" :lg="2"></a-col>
+                        <a-col :xs="24" :lg="20" :xl="16" :xxl="14" class="md-login-col">
+                            <h2 class="text-center">Create an Account</h2>
+                            <h4 class="text-center">Discovering and connecting with creative talent around the globe.</h4>
+                            <a-button size="large" block class="md-login-wechat">
+                                <a-icon type="wechat"/>
+                                LOGIN WITH WECHAT
+                            </a-button>
+                            <p></p>
+                            <a-button size="large" block class="md-login-weibo">
+                                <a-icon type="weibo-square"/>
+                                LOGIN WITH WEIBO
+                            </a-button>
+                            <p class="md-or">OR</p>
+                            <user-register-form v-model="form" @submit="onRegister"/>
+                            <br/>
+                            <p class="text-center md-t">
+                                Don't have an account yet?
+                                <a @click="$router.push({name: 'Login'})">Login</a>
+                            </p>
+                        </a-col>
+                    </a-row>
+                </a-spin>
             </a-col>
         </a-row>
     </div>
@@ -19,6 +45,8 @@
         components: {UserRegisterForm, VHeaderLayout},
         data () {
             return {
+                spinning: false,
+                background: require('@/assets/images/background/register.jpg'),
                 form: {
                     email: undefined,
                     username: undefined,
@@ -45,7 +73,5 @@
 </script>
 
 <style scoped lang="scss">
-    .v-register {
-
-    }
+    @import "index";
 </style>
