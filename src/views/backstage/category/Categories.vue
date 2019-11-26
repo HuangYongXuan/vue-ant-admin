@@ -21,7 +21,7 @@
                 <a-table-column title="ID" data-index="id" align="left" :width="100"/>
                 <a-table-column title="分类名称" data-index="name" align="center"/>
                 <a-table-column title="用户名" data-index="username" align="center">
-                    <template slot-scope="username,record">
+                    <template slot-scope="username, record">
                         <router-link v-if="username" :to="{name: 'Profile', params: {id: record.moderatorId}}">
                             {{username}}
                         </router-link>
@@ -68,12 +68,12 @@
         </a-spin>
         <md-drawer :md-active.sync="status.drawer.create" width="400" title="创建分类">
             <a-spin :spinning="spinning2">
-                <forums-category-form v-model="form" @submit="onCreateSubmit"></forums-category-form>
+                <forums-category-form v-model="form" @submit="onCreateSubmit"/>
             </a-spin>
         </md-drawer>
         <md-drawer :md-active.sync="status.drawer.edit" width="400" :title="'编辑['+status.data.old.name+']分类'">
             <a-spin :spinning="spinning2">
-                <forums-category-form v-model="status.data.edit" @submit="onEditSubmit"></forums-category-form>
+                <forums-category-form v-model="status.data.edit" @submit="onEditSubmit"/>
             </a-spin>
         </md-drawer>
         <md-image-preview :md-active.sync="showPreview" :src="src"/>

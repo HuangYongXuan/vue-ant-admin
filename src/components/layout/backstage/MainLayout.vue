@@ -9,7 +9,7 @@
                     <base-router-view/>
                 </div>
             </a-layout-content>
-            <a-layout-footer>Footer</a-layout-footer>
+            <a-layout-footer>© 2019 MATERIAL</a-layout-footer>
         </a-layout>
     </a-layout>
 </template>
