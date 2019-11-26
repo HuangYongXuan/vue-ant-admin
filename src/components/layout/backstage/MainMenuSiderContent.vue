@@ -47,10 +47,6 @@
                 <a-menu-item key="Classes" @click="$router.push({name: 'Classes'})">Classes</a-menu-item>
                 <a-menu-item key="Types" @click="$router.push({name: 'Types'})">Types</a-menu-item>
             </a-sub-menu>
-            <a-menu-item v-for="i in 30" :key="'mmm' +i">
-                <a-icon type="menu"/>
-                <span>Menu {{i}}</span>
-            </a-menu-item>
         </a-menu>
     </div>
 </template>
