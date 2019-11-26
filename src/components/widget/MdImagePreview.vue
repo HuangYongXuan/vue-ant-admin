@@ -104,14 +104,36 @@
             resize() {
                 let ratio = this.image.width / this.image.height;
                 let _h = window.innerHeight - 160, _w = window.innerWidth - 160;
+                let wRatio = _w / _h;
 
-                if (_h < _w) {
+                if (ratio > 1) {
+                    if (wRatio > 1) {
+                        this.width = _h * ratio;
+                        this.height = _h;
+                    } else {
+                        this.width = _w;
+                        this.height = _w / ratio;
+                    }
+                } else {
                     this.width = _h * ratio;
                     this.height = _h;
-                } else {
-                    this.width = _w;
-                    this.height = _w / ratio;
+                    if (wRatio > 1) {
+                        this.width = _h * ratio;
+                        this.height = _h;
+                    } else {
+                        this.width = _w;
+                        this.height = _w / ratio;
+                    }
                 }
+
+
+                // if (_h < _w) {
+                //     this.width = _h * ratio;
+                //     this.height = _h;
+                // } else {
+                //     this.width = _w;
+                //     this.height = _w / ratio;
+                // }
             },
             async clearMoveTimer(action) {
                 this.imageShow = true;
@@ -124,7 +146,7 @@
                 this.imageShow = false;
             },
             operation(action) {
-                　this.moveAnimation = action;
+                this.moveAnimation = action;
                 this.doImageShow(action);
             }
         },
@@ -209,6 +231,23 @@
         max-width: calc(100% - 160px);
         max-height: calc(100% - 160px);
         margin: 0 auto;
+    }
+
+    @media screen and(max-width: 576px) {
+        .md-image-preview {
+            width: 100%;
+
+            .md-preview {
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
     }
 </style>
 

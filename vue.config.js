@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HappyPack = require('happypack');
+const Compression = require('compression-webpack-plugin');
 const os = require('os');
 let happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 
@@ -30,6 +31,16 @@ module.exports = {
                 'vuex': 'Vuex',
                 'ant-design-vue': 'antd',
             };
+            if (process.env.PRODUCTION_PACKAGE_GZIP === 'true') {
+                config.plugins.push(
+                    new Compression({
+                        test: /\.(js|css|png|jpg|jpeg)$/, 			// 需要被压缩的文件后缀名
+                        filename: '[path].gz[query]', 	// filename
+                        threshold: 10240, 				// 大于多少字节开始压缩
+                        deleteOriginalAssets: false 	// 是否删除源文件
+                    })
+                );
+            }
         }
         config.plugins.push(new HappyPack({
             id: 'babel',
@@ -58,5 +69,8 @@ module.exports = {
     },
     publicPath: '/forums',
     runtimeCompiler: true,
+    productionSourceMap: false,
+    outputDir: 'dist/forums'
     // assetsDir: './static'
 };
+

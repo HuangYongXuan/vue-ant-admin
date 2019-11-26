@@ -4,7 +4,7 @@ import router from '@/router';
 import {notification} from 'ant-design-vue';
 
 export const Request = Axios.create({
-    baseURL: '/'
+    baseURL: process.env.NODE_ENV === 'production' ? process.env.VUE_APP_API_BASE_URL : process.env.VUE_APP_API_BASE_URL
 });
 
 let errorMessage = (msg) => {
@@ -35,8 +35,8 @@ Request.interceptors.response.use(
     err => {
         let resp = err.response;
         if (!resp) {
-            errorMessage(error);
-            return Promise.reject(error);
+            errorMessage(err.message);
+            return Promise.reject(err);
         }
         switch (resp.status) {
             case 400:

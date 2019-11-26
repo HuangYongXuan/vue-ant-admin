@@ -127,27 +127,21 @@
     <strong>We're sorry but vue-ant-admin doesn't work properly without JavaScript enabled. Please enable it to
         continue.</strong>
 </noscript>
-<div id="loading">
-    <div class="sk-chase">
-        <div class="sk-chase-dot"></div>
-        <div class="sk-chase-dot"></div>
-        <div class="sk-chase-dot"></div>
-        <div class="sk-chase-dot"></div>
-        <div class="sk-chase-dot"></div>
-        <div class="sk-chase-dot"></div>
+
+<div id="app">
+    <div id="loading">
+        <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
     </div>
 </div>
-<div id="app"></div>
 <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
 <script type="text/javascript" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
 <% } %>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let loading = document.getElementById('loading');
-        setTimeout(function () {
-            loading.remove();
-        }, 1000);
-    });
-</script>
 </html>
