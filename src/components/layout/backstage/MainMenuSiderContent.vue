@@ -41,11 +41,11 @@
         </div>
         <a-menu mode="inline" :openKeys.sync="openKeys" @click="onClick" :theme="_theme"
                 :defaultOpenKeys="defaultOpenKeys" v-model="selectedKeys">
-            <a-sub-menu key="板块">
-                <span slot="title"><a-icon type="shop"/><span>Category</span></span>
-                <a-menu-item key="分类列表" @click="$router.push({name: 'Categories'})">Categories</a-menu-item>
-                <a-menu-item key="类型列表" @click="$router.push({name: 'Classes'})">Classes</a-menu-item>
-                <a-menu-item key="标签列表" @click="$router.push({name: 'Types'})">Types</a-menu-item>
+            <a-sub-menu key="Category">
+                <span slot="title"><a-icon type="shop"/><span>板块Category</span></span>
+                <a-menu-item key="Categories" @click="$router.push({name: 'Categories'})">分类列表</a-menu-item>
+                <a-menu-item key="Classes" @click="$router.push({name: 'Classes'})">类型列表</a-menu-item>
+                <a-menu-item key="Types" @click="$router.push({name: 'Types'})">标签列表</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
