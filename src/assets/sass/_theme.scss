@@ -1,0 +1,49 @@
+$_theme_light: #ffffff;
+$_theme_dark: #001529;
+
+.v-theme-light {
+	color: rgba(0, 0, 0, 0.65);
+	background: $_theme_light;
+
+	&.ant-drawer {
+		background-color: transparent;
+	}
+
+	&.ant-layout-header {
+		background-color: $_theme_light;
+	}
+}
+
+
+.v-theme-dark {
+	color: rgba(255, 255, 255, 0.65);
+	background: $_theme_dark;
+
+	.ant-breadcrumb-separator,
+	.ant-breadcrumb-link {
+		color: rgba(255, 255, 255, 0.65);
+	}
+
+	.ant-breadcrumb {
+		> span {
+			&:last-child {
+				.ant-breadcrumb-link {
+					color: white;
+				}
+			}
+		}
+	}
+
+	&.md-main-layout-breadcrumb {
+		border-color: #4c4c4c !important;
+	}
+
+	&.ant-drawer {
+		background-color: transparent;
+
+		.ant-drawer-content {
+			color: rgba(255, 255, 255, 0.65);
+			background: #001529;
+		}
+	}
+}

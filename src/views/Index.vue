@@ -2,7 +2,7 @@
     <a-layout class="v-index">
         <v-header-layout class="md-header"/>
         <index-particle :particles-num="150"/>
-        <a-button class="v-btn" type="primary" shape="round" icon="plus" size="large"
+        <a-button class="v-btn" type="primary" shape="round" icon="plus" size="large" v-if="!loginStatus"
                   @click="$router.push({name: 'Register'})">Join
         </a-button>
     </a-layout>
@@ -11,9 +11,13 @@
 <script>
     import VHeaderLayout from '@/components/layout/base/VHeaderLayout';
     import IndexParticle from '@/components/widget/IndexParticle';
+    import {mapGetters} from 'vuex';
 
     export default {
-        components: {IndexParticle, VHeaderLayout}
+        components: {IndexParticle, VHeaderLayout},
+        computed: {
+            ...mapGetters({loginStatus: 'loginStatus'})
+        },
     };
 </script>
 

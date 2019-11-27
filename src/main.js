@@ -8,7 +8,11 @@ import VueBus from 'vue-bus/dist/vue-bus';
 import Utils from '@/common/Utils';
 import '@/common/VTheme';
 import '@/assets/sass/app.scss';
-import '@/router/RouterHook'
+import '@/router/RouterHook';
+
+if (process.env.NODE_ENV === 'developement') {
+    require('ant-design-vue/dist/antd.min.css')
+}
 
 Vue.use(antd);
 Vue.use(VueBus);
