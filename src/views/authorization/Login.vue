@@ -3,33 +3,33 @@
         <v-header-layout/>
         <a-row>
             <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
-                   :md="12"></a-col>
+                   :md="12"/>
             <a-col :span="12" :xs="24" :md="12">
                 <a-spin :spinning="spinning">
                     <a-row>
-                        <a-col :xs="0" :lg="2"></a-col>
+                        <a-col :xs="0" :lg="2"/>
                         <a-col :xs="24" :lg="20" :xl="16" :xxl="14" class="md-login-col">
-                            <h2 class="text-center">Login to Continue</h2>
-                            <h4 class="text-center">Welcome back, sign in with your Material account</h4>
+                            <h2 class="text-center">用户登陆</h2>
+                            <h4 class="text-center">欢迎回来，使用您的帐户进行登录</h4>
                             <a-button size="large" block class="md-login-wechat">
                                 <a-icon type="wechat"/>
-                                LOGIN WITH WECHAT
+                                通过微信登陆
                             </a-button>
-                            <p></p>
+                            <p/>
                             <a-button size="large" block class="md-login-weibo">
                                 <a-icon type="weibo-square"/>
-                                LOGIN WITH WEIBO
+                                通过微博登陆
                             </a-button>
                             <p class="md-or">OR</p>
                             <user-login-form v-model="form" @submit="onLogin"/>
                             <br/>
                             <p class="text-center md-t">
-                                Don't have an account yet?
-                                <a @click="$router.push({name: 'Register'})">Sign up</a>
+                                你还没有账号吗?
+                                <a @click="$router.push({name: 'Register'})">来注册吧</a>
                             </p>
                             <p class="text-center">
-                                Forgot your username or password?
-                                <a @click="$router.push({name: 'ForgotPassword'})">Reset password</a>
+                                有账号但是忘记密码了?试试
+                                <a @click="$router.push({name: 'ForgotPassword'})">重置密码</a>
                             </p>
                         </a-col>
                     </a-row>

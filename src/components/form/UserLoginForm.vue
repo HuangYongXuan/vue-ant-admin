@@ -7,7 +7,7 @@
             <a-input type="password" v-model="data.password" placeholder="请输入密码" size="large"/>
         </md-form-item>
         <md-form-item>
-            <a-checkbox @change.stop="() => {}">Remember Me</a-checkbox>
+            <a-checkbox @change.stop="() => {}">记住登陆</a-checkbox>
         </md-form-item>
         <a-button type="primary" html-type="submit" block size="large">登陆</a-button>
     </md-form>

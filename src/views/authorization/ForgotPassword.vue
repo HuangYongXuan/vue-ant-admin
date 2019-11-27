@@ -3,15 +3,14 @@
         <v-header-layout/>
         <a-row>
             <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
-                   :md="12"></a-col>
+                   :md="12"/>
             <a-col :span="12" :xs="24" :md="12">
                 <a-row>
-                    <a-col :xs="0" :lg="2"></a-col>
+                    <a-col :xs="0" :lg="2"/>
                     <a-col :xs="24" :lg="20" :xl="16" :xxl="14" class="md-login-col">
                         <a-spin :spinning="spinning">
-                            <h2 class="text-center">Forgot Password?</h2>
-                            <h4 class="text-center tx-s">DEnter the email address you used when you joined and we’ll
-                                send you instructions to reset your password.</h4>
+                            <h2 class="text-center">忘记了密码?</h2>
+                            <h4 class="text-center tx-s">输入您注册时使用的电子邮件地址，我们将发送给您重置密码的邮件.</h4>
                             <user-forgot-password-form v-model="form" @submit="sendEmail"/>
                         </a-spin>
                     </a-col>

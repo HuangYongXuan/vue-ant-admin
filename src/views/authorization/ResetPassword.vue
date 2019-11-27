@@ -3,13 +3,13 @@
         <v-header-layout/>
         <a-row>
             <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
-                   :md="12"></a-col>
+                   :md="12"/>
             <a-col :span="12" :xs="24" :md="12">
                 <a-row>
-                    <a-col :xs="0" :lg="2"></a-col>
+                    <a-col :xs="0" :lg="2"/>
                     <a-col :xs="24" :lg="20" :xl="16" :xxl="14" class="md-login-col">
                         <a-spin :spinning="spinning">
-                            <h2 class="text-center">Reset Password</h2>
+                            <h2 class="text-center">设置密码</h2>
                             <h4 class="text-center tx-s">请在下面设置{{user.email || '你'}}的新密码</h4>
                             <user-reset-password-form v-model="form" @submit="reset"/>
                         </a-spin>

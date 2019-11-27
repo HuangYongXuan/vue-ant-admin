@@ -102,38 +102,29 @@
                 }, 350);
             },
             resize() {
-                let ratio = this.image.width / this.image.height;
-                let _h = window.innerHeight - 160, _w = window.innerWidth - 160;
-                let wRatio = _w / _h;
-
-                if (ratio > 1) {
-                    if (wRatio > 1) {
-                        this.width = _h * ratio;
-                        this.height = _h;
-                    } else {
-                        this.width = _w;
-                        this.height = _w / ratio;
-                    }
-                } else {
-                    this.width = _h * ratio;
-                    this.height = _h;
-                    if (wRatio > 1) {
-                        this.width = _h * ratio;
-                        this.height = _h;
-                    } else {
-                        this.width = _w;
-                        this.height = _w / ratio;
-                    }
+                let maxWidth = window.innerHeight - 160, maxHeight = window.innerWidth - 160;
+                let hRatio;
+                let wRatio;
+                let Ratio = 1;
+                let w = this.image.width;
+                let h = this.image.height;
+                wRatio = maxWidth / w;
+                hRatio = maxHeight / h;
+                if (maxWidth === 0 && maxHeight === 0) {
+                    Ratio = 1;
+                } else if (maxWidth === 0) {//
+                    if (hRatio < 1) Ratio = hRatio;
+                } else if (maxHeight === 0) {
+                    if (wRatio < 1) Ratio = wRatio;
+                } else if (wRatio < 1 || hRatio < 1) {
+                    Ratio = (wRatio <= hRatio ? wRatio : hRatio);
                 }
-
-
-                // if (_h < _w) {
-                //     this.width = _h * ratio;
-                //     this.height = _h;
-                // } else {
-                //     this.width = _w;
-                //     this.height = _w / ratio;
-                // }
+                if (Ratio < 1) {
+                    w = w * Ratio;
+                    h = h * Ratio;
+                }
+                this.height = h;
+                this.width = w;
             },
             async clearMoveTimer(action) {
                 this.imageShow = true;

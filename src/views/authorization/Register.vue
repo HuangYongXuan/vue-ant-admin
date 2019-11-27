@@ -3,29 +3,29 @@
         <v-header-layout/>
         <a-row>
             <a-col :span="12" :style="{backgroundImage: 'url('+ background +')'}" class="background" :xs="0" :sm="0"
-                   :md="12"></a-col>
+                   :md="12"/>
             <a-col :span="12" :xs="24" :md="12">
                 <a-spin :spinning="spinning">
                     <a-row>
-                        <a-col :xs="0" :lg="2"></a-col>
+                        <a-col :xs="0" :lg="2"/>
                         <a-col :xs="24" :lg="20" :xl="16" :xxl="14" class="md-login-col">
-                            <h2 class="text-center">Create an Account</h2>
-                            <h4 class="text-center">Discovering and connecting with creative talent around the globe.</h4>
+                            <h2 class="text-center">创建账户</h2>
+                            <h4 class="text-center">通过账户来管理你的账户数据</h4>
                             <a-button size="large" block class="md-login-wechat">
                                 <a-icon type="wechat"/>
-                                LOGIN WITH WECHAT
+                                通过微信登陆
                             </a-button>
-                            <p></p>
+                            <p/>
                             <a-button size="large" block class="md-login-weibo">
                                 <a-icon type="weibo-square"/>
-                                LOGIN WITH WEIBO
+                                通过微博登陆
                             </a-button>
                             <p class="md-or">OR</p>
                             <user-register-form v-model="form" @submit="onRegister"/>
                             <br/>
                             <p class="text-center md-t">
-                                Don't have an account yet?
-                                <a @click="$router.push({name: 'Login'})">Login</a>
+                                已经注册了账户？
+                                <a @click="$router.push({name: 'Login'})">去登陆吧</a>
                             </p>
                         </a-col>
                     </a-row>
