@@ -7,21 +7,6 @@
         </a>
         <div class="v-user-wrapper">
             <user-header-menu>
-                <a-sub-menu slot="system">
-                    <span slot="title">
-                        <a-icon type="bg-colors"/>{{_theme === 'dark' ? '黑色' : '白色'}}主题
-                    </span>
-                    <a-menu-item-group>
-                        <a-menu-item key="dark" @click.native="changeTheme('dark')">
-                            <a-icon type="layout"/>
-                            黑色主题
-                        </a-menu-item>
-                        <a-menu-item key="light" @click.native="changeTheme('light')">
-                            <a-icon type="layout"/>
-                            白色主题
-                        </a-menu-item>
-                    </a-menu-item-group>
-                </a-sub-menu>
                 <a-menu-item slot="option" @click="$router.push({name:'Notification'})">
                     <a-badge :count="19" :offset="[40, 5]">
                         <a-icon type="bell"/>

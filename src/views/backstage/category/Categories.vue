@@ -66,12 +66,13 @@
                 />
             </div>
         </a-spin>
-        <md-drawer :md-active.sync="status.drawer.create" width="400" title="创建分类">
+        <md-drawer :md-active.sync="status.drawer.create" :width="_setting.formDrawerWidth" title="创建分类">
             <a-spin :spinning="spinning2">
                 <forums-category-form v-model="form" @submit="onCreateSubmit"/>
             </a-spin>
         </md-drawer>
-        <md-drawer :md-active.sync="status.drawer.edit" width="400" :title="'编辑['+status.data.old.name+']分类'">
+        <md-drawer :md-active.sync="status.drawer.edit" :width="_setting.formDrawerWidth"
+                   :title="'编辑['+status.data.old.name+']分类'">
             <a-spin :spinning="spinning2">
                 <forums-category-form v-model="status.data.edit" @submit="onEditSubmit"/>
             </a-spin>
@@ -166,15 +167,15 @@
                     this.$utils.responseHandler(res, false).then(({data}) => {
                         if (data.roles) {
                             data.roles = data.roles.map(item => {
-                               return item.rolesId
+                                return item.rolesId;
                             });
                         } else {
-                            data.roles = []
+                            data.roles = [];
                         }
                         this.status.data.old = data;
                         this.status.data.edit = Object.assign({}, data);
-                    }).catch(() =>this.status.drawer.edit = false)
-                }).catch(() =>this.status.drawer.edit = false).finally(() => {
+                    }).catch(() => this.status.drawer.edit = false);
+                }).catch(() => this.status.drawer.edit = false).finally(() => {
                     this.spinning2 = false;
                 });
             },
@@ -187,7 +188,7 @@
                     });
                 }).finally(() => this.spinning2 = false);
             },
-            onShowImagePreview (src) {
+            onShowImagePreview(src) {
                 this.src = src;
                 this.showPreview = true;
             }

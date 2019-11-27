@@ -75,6 +75,9 @@
         },
         methods: {
             async validator() {
+                if (!this.prop) {
+                    return true;
+                }
                 let data = {
                     name: this.mdForm.model[this.prop]
                 };
@@ -189,6 +192,8 @@
 
         .md-form-input {
             position: relative;
+            display: flex;
+            align-items: center;
 
             > .ant-btn {
                 margin-right: 10px;

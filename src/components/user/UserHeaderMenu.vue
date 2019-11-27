@@ -22,7 +22,7 @@
                 </a-menu-item-group>
                 <a-menu-item-group title="OPTION" class="md-list">
                     <slot name="option"/>
-                    <a-menu-item key="Setting" @click="$router.push({name: 'Setting'})">
+                    <a-menu-item key="Setting" @click="showSetting">
                         <a-icon type="setting"/>
                         设置
                     </a-menu-item>
@@ -34,17 +34,26 @@
             </a-menu>
         </a-dropdown>
         <slot name="end"/>
+        <md-drawer :md-active.sync="drawer.setting" :width="576" title="偏好设置(本地保存)">
+            <setting-page/>
+        </md-drawer>
     </a-menu>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
+    import MdDrawer from '@/components/widget/MdDrawer';
+    import SettingPage from '@/views/backstage/option/Setting';
 
     export default {
         name: 'UserHeaderMenu',
+        components: {MdDrawer, SettingPage},
         data() {
             return {
-                defaultSelectedKeys: []
+                defaultSelectedKeys: [],
+                drawer: {
+                    setting: false
+                }
             };
         },
         created() {
@@ -65,6 +74,9 @@
                 this.$store.dispatch('logout').then().finally(() => {
                     this.$router.replace({name: 'Base'});
                 });
+            },
+            showSetting() {
+                this.drawer.setting = true;
             }
         }
     };
@@ -86,6 +98,7 @@
 <style lang="scss">
     .md-list {
         min-width: 150px;
+
         .ant-dropdown-menu-item-group-list {
             list-style: none;
             padding: 0;
@@ -93,6 +106,7 @@
             .anticon {
                 margin-right: 8px;
             }
+
             > .ant-dropdown-menu-submenu-vertical {
                 padding: 0;
             }

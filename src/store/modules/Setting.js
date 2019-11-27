@@ -13,6 +13,9 @@ export default {
     mutations: {
         SET_THEME(state, theme) {
             state.theme = theme;
+        },
+        SET_SETTING(state, setting) {
+            state.setting = setting
         }
     },
     actions: {

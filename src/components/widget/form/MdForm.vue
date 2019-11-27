@@ -46,6 +46,9 @@
             async validator() {
                 return await new Promise(async (resolve, reject) => {
                     let isSuccess = true;
+                    if (!this.model) {
+                        return resolve();
+                    }
                     for (let i = 0; i < this.fields.length; i++) {
                         let field = this.fields[i];
                         let success = await field.validator();
@@ -56,7 +59,7 @@
                     if (!isSuccess) {
                         return reject();
                     }
-                    return  resolve()
+                    return resolve();
                 });
             }
         },
