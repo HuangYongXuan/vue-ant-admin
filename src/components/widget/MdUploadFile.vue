@@ -1,12 +1,14 @@
 <template>
-    <div class="md-upload-file" :style="{height, width}" @click="selectFile" ref="f">
-        <img :src="data | imageSrc" alt="" :width="width" :height="height" v-if="data">
-        <div v-else class="md-action">
-            <a-icon :type="loading ? 'loading' : 'plus'"/>
-            <div class="ant-upload-text">上传图片</div>
+    <a-spin :spinning="loading" tip="上传中">
+        <div class="md-upload-file" :style="{height, width}" @click="selectFile" ref="f">
+            <img :src="data | imageSrc" alt="" :width="width" :height="height" v-if="data">
+            <div v-else class="md-action">
+                <a-icon :type="loading ? 'loading' : 'plus'"/>
+                <div class="ant-upload-text">上传图片</div>
+            </div>
+            <input type="file" hidden @change.stop="onFileChange" @input.stop="h" ref="file" :accept="accept">
         </div>
-        <input type="file" hidden @change.stop="onFileChange" @input.stop="h" ref="file" :accept="accept">
-    </div>
+    </a-spin>
 </template>
 
 <script>
@@ -34,7 +36,8 @@
         },
         data() {
             return {
-                loading: false
+                loading: false,
+                spinning: true
             };
         },
         methods: {
