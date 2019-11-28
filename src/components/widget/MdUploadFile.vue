@@ -53,7 +53,7 @@
                 this.loading = true;
                 fileSystem.upload(formData).then(res => {
                     this.$utils.responseHandler(res, true, true, '上传成功').then(({data}) => {
-                        this.data = this._getImageFullPath(data.savePath);
+                        this.data = data.savePath;
                         this.bubble();
                     });
                 }).finally(() => {

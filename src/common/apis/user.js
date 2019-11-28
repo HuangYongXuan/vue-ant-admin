@@ -30,11 +30,11 @@ export const destroy = () => {
 
 /**
  * 获取授权用户详情
- * @param roles
+ * @param params
  * @returns {Promise<AxiosResponse<T>>}
  */
-export const profile = (roles) => {
-    return Request.get(`${baseUri}profile`, {params: {roles}});
+export const profile = (params) => {
+    return Request.get(`${baseUri}profile`, {params});
 };
 
 /**
@@ -71,6 +71,14 @@ export const forgotPasswordInfo = (token) => {
 export const resetPassword = (data) => {
     return Request.post(`${baseUri}reset-password`, data);
 };
+/**
+ * 更新用户基本信息
+ * @param data
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+export const profileUpdate = (data) => {
+    return Request.post(`${baseUri}profile/update`, data);
+};
 
 export default {
     create,
@@ -80,5 +88,6 @@ export default {
     destroy,
     forgotPassword,
     forgotPasswordInfo,
-    resetPassword
+    resetPassword,
+    profileUpdate
 };

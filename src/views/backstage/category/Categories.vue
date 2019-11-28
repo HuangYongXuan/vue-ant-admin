@@ -22,7 +22,7 @@
                 <a-table-column title="分类名称" data-index="name" align="center"/>
                 <a-table-column title="用户名" data-index="username" align="center">
                     <template slot-scope="username, record">
-                        <router-link v-if="username" :to="{name: 'Profile', params: {id: record.moderatorId}}">
+                        <router-link v-if="username" :to="{name: 'Profile', query: {id: record.moderatorId}}">
                             {{username}}
                         </router-link>
                     </template>

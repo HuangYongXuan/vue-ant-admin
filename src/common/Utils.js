@@ -105,7 +105,34 @@ export const generateUuid = (prefix = '', size = 6) => {
     return prefix + Math.random().toString(36).slice(2, size + 2);
 };
 
+export const deepCopy = (object) => {
+    if (object === null || object === undefined || typeof object !== 'object') {
+        return object;
+    }
+    let isArray = Array.isArray(object);
+    let newObj = {};
+    if (isArray) {
+        newObj = [];
+    }
+    for (let key in object) {
+        let v = object[key];
+
+        if (typeof v === 'object') {
+            newObj[key] = deepCopy(v);
+        } else {
+            if (isArray) {
+                newObj.push(v);
+            } else {
+                newObj[key] = v;
+            }
+        }
+    }
+
+    return newObj;
+};
+
 export default {
     ...Utils,
-    generateUuid
+    generateUuid,
+    deepCopy
 };

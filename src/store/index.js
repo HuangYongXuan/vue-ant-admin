@@ -23,11 +23,17 @@ export default new Vuex.Store({
 
 Vue.mixin({
     filters: {
-        imageSrc (v) {
+        imageSrc(v) {
             if (/^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/i.test(v)) {
-                return v
+                return v;
             }
             return process.env.VUE_APP_STATIC_RESOURCE_URL + v;
+        },
+        formatterTimestamp(v) {
+            if (typeof v === 'string') {
+                return v.split('.')[0];
+            }
+            return '';
         }
     },
     computed: {
