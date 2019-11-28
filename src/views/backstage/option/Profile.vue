@@ -48,7 +48,7 @@
 
         <md-drawer title="修改信息" :width="_setting.formDrawerWidth" :md-active.sync="drawer">
             <a-spin :spinning="spinning">
-                <user-profile-form v-model="form" @submit="onUpdateUser"/>
+                <user-profile-form v-model="form" @submit="onUpdateUser" class="v-form"/>
             </a-spin>
         </md-drawer>
     </div>

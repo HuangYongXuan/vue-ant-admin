@@ -4,7 +4,7 @@
         <a-dropdown :trigger="['click']" v-if="loginStatus">
             <span class="md-user-data">
                 <span class="submenu-title-wrapper md-link">
-                    <a-avatar :size="32" :src="userInfo.avatar"/>
+                    <a-avatar :size="32" :src="userInfo.avatar | imageSrc"/>
                     {{userInfo.username}}
                 </span>
             </span>
