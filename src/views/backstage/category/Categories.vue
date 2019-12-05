@@ -139,8 +139,6 @@
             onCreateSubmit() {
                 this.spinning2 = true;
                 let data = Object.assign({}, this.form);
-                data.icon = process.env.VUE_APP_STATIC_RESOURCE_URL + data.icon;
-                data.banner = process.env.VUE_APP_STATIC_RESOURCE_URL + data.banner;
                 category.created(data).then(res => {
                     this.$utils.responseHandler(res, true).then(() => {
                         this.status.drawer.create = false;
